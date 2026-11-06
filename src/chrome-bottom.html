@@ -1,0 +1,34 @@
+</main>
+
+<sc-if value="{{showEnd}}" hint-placeholder-val="{{true}}">
+<section class="s-end">
+  <div class="s-in">
+    <h2 class="s-h2">{{endH}}</h2>
+    <div class="s-ctas"><a class="a-btn" href="{{href.onb}}">{{t.cta}}</a></div>
+    <p class="s-note">{{t.ctaNote}}</p>
+  </div>
+</section>
+</sc-if>
+
+<footer class="s-foot">
+  <div class="s-in">
+    <div class="s-foot-top">
+      <div class="s-foot-brand">
+        <a class="s-brand" href="{{href.home}}" aria-label="ENTer"><dc-import name="Logo" size="24" hint-size="98px,24px"></dc-import></a>
+        <p>{{t.footLine}}</p>
+      </div>
+      <div class="s-foot-cols">
+        <sc-for list="{{footCols}}" as="c" hint-placeholder-count="3">
+          <div class="s-foot-col">
+            <p>{{c.t}}</p>
+            <sc-for list="{{c.links}}" as="l" hint-placeholder-count="4"><a href="{{l.href}}">{{l.label}}</a></sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <p class="s-foot-legal">{{t.foot}}</p>
+  </div>
+</footer>
+</div>
+
+</div>

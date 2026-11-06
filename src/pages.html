@@ -1,0 +1,269 @@
+<sc-if value="{{is.subjects}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.sjH}}</h1>
+  <p class="s-sub">{{t.sjSub}}</p>
+</section>
+<section class="s-sec s-alt" style="padding-top: clamp(28px, 3.5cqw, 48px)">
+  <div class="s-in s-subj">
+    <div class="s-side">
+      <div>
+        <p class="s-side-t">{{t.sjReq}}</p>
+        <div class="s-rail" role="group" aria-label="{{t.sjReq}}">
+          <sc-for list="{{subjReq}}" as="x" hint-placeholder-count="3"><button type="button" aria-pressed="{{x.pressed}}" data-subj="{{x.id}}">{{x.label}}</button></sc-for>
+        </div>
+      </div>
+      <div>
+        <p class="s-side-t">{{t.sjProf}}</p>
+        <div class="s-rail" role="group" aria-label="{{t.sjProf}}">
+          <sc-for list="{{subjProf}}" as="x" hint-placeholder-count="13"><button type="button" aria-pressed="{{x.pressed}}" data-subj="{{x.id}}">{{x.label}}</button></sc-for>
+        </div>
+      </div>
+    </div>
+    <div class="s-panels">
+    <sc-for list="{{panels}}" as="cur" hint-placeholder-count="16">
+    <section class="s-panel {{cur.cls}}" data-panel="{{cur.id}}" id="{{cur.id}}">
+      <div class="s-panel-head">
+        <h2 class="s-h3">{{cur.name}}</h2>
+        <div class="s-stats">
+          <div class="s-stat"><span class="s-statn">{{cur.q}}</span><span class="s-statl">{{t.stQ}}</span></div>
+          <div class="s-stat"><span class="s-statn">{{cur.p}}</span><span class="s-statl">{{t.stP}}</span></div>
+          <div class="s-stat"><span class="s-statn">{{cur.m}}</span><span class="s-statl">{{t.stM}}</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="s-lt">{{t.sjTypes}}</h3>
+        <ul class="s-types" style="margin-top: 8px"><sc-for list="{{cur.types}}" as="x" hint-placeholder-count="4"><li>{{x}}</li></sc-for></ul>
+      </div>
+      <div>
+        <h3 class="s-lt">{{t.sjTopics}}</h3>
+        <ul class="s-list" style="margin-top: 4px"><sc-for list="{{cur.topics}}" as="x" hint-placeholder-count="6"><li>{{x}}</li></sc-for></ul>
+      </div>
+      <a class="a-btn" href="{{href.tasks}}" style="align-self: flex-start">{{t.sjCta}}</a>
+    </section>
+    </sc-for>
+    </div>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.spH}}</h2>
+    <p class="s-sub">{{t.spSub}}</p>
+    <div class="s-pairs">
+      <sc-for list="{{pairNames}}" as="x" hint-placeholder-count="12"><div class="s-pairc" style="background: var(--bg)">{{x}}</div></sc-for>
+    </div>
+    <p class="s-note" style="margin-top: 16px">{{t.spNote}} <a href="https://testcenter.kz" target="_blank" rel="noopener">{{t.spLink}}</a></p>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.mock}}" hint-placeholder-val="{{false}}">
+<section class="s-darkhero">
+  <div class="s-in">
+    <h1 class="s-h1">{{t.mkH}}</h1>
+    <p class="s-sub">{{t.mkSub}}</p>
+    <div class="s-ctas"><a class="a-btn" href="{{href.mockStart}}">{{t.mkCta}}</a></div>
+    <p class="s-note">{{t.mkNote}}</p>
+    <div class="s-ribbon" aria-label="{{t.mkRibbonAria}}" role="img">
+      <sc-for list="{{ribbon}}" as="g" hint-placeholder-count="5">
+        <div class="s-ribbon-g">
+          <p class="s-ribbon-l"><span>{{g.label}}</span><b>{{g.n}}</b></p>
+          <div class="s-rcells {{g.cls}}" style="--cols: {{g.cols}}"><sc-for list="{{g.cells}}" as="c" hint-placeholder-count="10"><span></span></sc-for></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.mkFeatH}}</h2>
+    <div class="s-feats">
+      <sc-for list="{{t.mkFeats}}" as="f" hint-placeholder-count="4"><article class="s-featc"><h3>{{f.t}}</h3><p class="s-p">{{f.d}}</p></article></sc-for>
+    </div>
+    <div class="s-gap">
+      <div class="s-win" aria-hidden="true" inert=""><div class="s-win-in"><dc-import name="App" preset="mockRead" embed="{{true}}" nav="{{false}}" min-h="800px" lang="{{lang}}" hint-size="1280px,800px"></dc-import></div></div>
+      <div class="s-win-ph"><div class="s-phone" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="mockNav" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div></div>
+    </div>
+  </div>
+</section>
+<section class="s-sec s-alt" style="padding-bottom: 0">
+  <div class="s-in s-split">
+    <div>
+      <h2 class="s-h2">{{t.mkAfterH}}</h2>
+      <p class="s-p" style="margin-top: 12px">{{t.mkAfterD}}</p>
+      <ul class="s-checks"><sc-for list="{{t.mkAfter}}" as="f" hint-placeholder-count="4"><li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+    </div>
+    <div class="s-cen"><div class="s-phone s-l" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="result" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div></div>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.faqH}}</h2>
+    <div class="s-faq">
+      <sc-for list="{{t.mkFaq}}" as="x" hint-placeholder-count="4">
+        <details>
+          <summary><span>{{x.q}}</span><svg class="s-pm" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>{{x.a}}</p>
+        </details>
+      </sc-for>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.grants}}" hint-placeholder-val="{{false}}">
+<section class="s-head" data-calc-i18n="{{calcI18n}}">
+  <h1 class="s-h1">{{t.grH}}</h1>
+  <p class="s-sub">{{t.grSub}}</p>
+</section>
+<section class="s-sec s-alt" style="padding-top: clamp(28px, 3.5cqw, 48px)">
+  <div class="s-in s-calc">
+    <div class="s-calc-card">
+      <h2 class="s-lt">{{t.grInput}}</h2>
+      <p class="s-calc-bar" aria-hidden="true"><span>{{t.grTotal}}</span><b data-calc-total2="">{{total}} / 140</b></p>
+      <div style="margin-top: 4px">
+        <sc-for list="{{calcRows}}" as="r" hint-placeholder-count="5">
+          <div class="s-slider">
+            <label class="s-slider-top" for="{{r.id}}"><span>{{r.label}}</span><b data-calc-v="{{$i}}">{{r.v}} / {{r.max}}</b></label>
+            <input id="{{r.id}}" type="range" min="0" max="{{r.max}}" step="1" value="{{r.v}}" data-calc-i="{{$i}}">
+            <p class="s-slider-min {{r.cls}}" data-calc-m="{{$i}}">{{r.minText}}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div class="s-calc-card s-sticky">
+      <p class="s-note" style="font-size: 15px">{{t.grTotal}}</p>
+      <p class="s-total" aria-live="polite"><span data-calc-total="">{{total}}</span><span class="a-of">/140</span></p>
+      <p class="s-alert" role="status" hidden="" data-calc-alert=""></p>
+      <ul style="margin-top: 12px">
+        <sc-for list="{{thr}}" as="r" hint-placeholder-count="5">
+          <li class="a-thr" data-thr="{{r.min}}">
+            <span class="a-thr-n"><b>{{r.min}}</b><span>{{r.label}}</span></span>
+            <span class="a-st {{r.cls}}">{{r.state}}</span>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.grKnowH}}</h2>
+    <div class="s-feats s-3">
+      <sc-for list="{{t.grKnow}}" as="f" hint-placeholder-count="3"><article class="s-featc"><h3>{{f.t}}</h3><p class="s-p">{{f.d}}</p></article></sc-for>
+    </div>
+    <p class="s-note" style="margin-top: 18px">{{t.grSrc}} <a href="https://www.gov.kz/memleket/entities/sci/press/news/details/1217215?lang=ru" target="_blank" rel="noopener">{{t.grSrcL}}</a></p>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.pricing}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.prH}}</h1>
+  <p class="s-sub">{{t.prSub}}</p>
+</section>
+<section class="s-sec s-alt s-tc" style="padding-top: clamp(28px, 3.5cqw, 48px)">
+  <div class="s-in">
+    <div class="s-plans" style="margin-top: 0">
+      <article class="s-plan">
+        <h2>{{t.pl1}}</h2>
+        <p class="a-price">{{t.pl1p}}</p>
+        <p class="s-p">{{t.pl1d}}</p>
+        <ul class="s-feat"><sc-for list="{{t.pl1f}}" as="f" hint-placeholder-count="3"><li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+        <a class="a-btn2" href="{{href.onb}}">{{t.cta}}</a>
+      </article>
+      <article class="s-plan">
+        <h2>{{t.pl2}}</h2>
+        <p class="a-price" data-term-price="">{{termPrice}}</p>
+        <div class="s-terms" role="group" aria-label="{{t.termAria}}">
+          <sc-for list="{{terms}}" as="x" hint-placeholder-count="3"><button type="button" aria-pressed="{{x.pressed}}" data-term="{{x.price}}">{{x.label}}</button></sc-for>
+        </div>
+        <ul class="s-feat"><sc-for list="{{t.pl2f}}" as="f" hint-placeholder-count="4"><li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+        <a class="a-btn" href="{{href.pay}}">{{t.pl2c}}</a>
+      </article>
+    </div>
+    <p class="s-note" style="margin-top: 16px">{{t.payNote}}</p>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.cmpH}}</h2>
+    <div class="s-tbl" style="background: var(--bg)">
+      <table class="s-cmp">
+        <thead><tr><th></th><th>{{t.pl1}}</th><th>{{t.pl2}}</th></tr></thead>
+        <tbody>
+          <sc-for list="{{cmpRows}}" as="r" hint-placeholder-count="8">
+            <tr>
+              <td>{{r.n}}</td>
+              <td>
+                <sc-if value="{{r.aYes}}" hint-placeholder-val="{{true}}"><svg class="s-yes" role="img" aria-label="{{t.yes}}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+                <sc-if value="{{r.aNo}}" hint-placeholder-val="{{false}}"><span class="s-no" aria-label="{{t.no}}">–</span></sc-if>
+                <sc-if value="{{r.aText}}" hint-placeholder-val="{{false}}"><span>{{r.aText}}</span></sc-if>
+              </td>
+              <td>
+                <sc-if value="{{r.bYes}}" hint-placeholder-val="{{true}}"><svg class="s-yes" role="img" aria-label="{{t.yes}}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+                <sc-if value="{{r.bText}}" hint-placeholder-val="{{false}}"><span>{{r.bText}}</span></sc-if>
+              </td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="s-sec s-alt s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.faqH}}</h2>
+    <div class="s-faq">
+      <sc-for list="{{t.prFaq}}" as="x" hint-placeholder-count="4">
+        <details>
+          <summary><span>{{x.q}}</span><svg class="s-pm" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>{{x.a}}</p>
+        </details>
+      </sc-for>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.parents}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.paH}}</h1>
+  <p class="s-sub">{{t.paSub}}</p>
+  <div class="s-chat s-gap">
+    <p class="s-chat-t">{{t.paChat}}</p>
+    <div class="s-white s-bubble">{{t.reportMsg}}</div>
+  </div>
+</section>
+<section class="s-sec s-alt">
+  <div class="s-in s-split">
+    <div>
+      <h2 class="s-h2">{{t.paWhatH}}</h2>
+      <p class="s-p" style="margin-top: 12px">{{t.paWhatD}}</p>
+      <ul class="s-checks"><sc-for list="{{t.paWhat}}" as="f" hint-placeholder-count="3"><li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+    </div>
+    <div class="s-cen"><div class="s-phone s-l s-full" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="profile" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div></div>
+  </div>
+</section>
+<section class="s-sec s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.paHowH}}</h2>
+    <ol class="s-feats s-3">
+      <sc-for list="{{t.paHow}}" as="f" hint-placeholder-count="3"><li class="s-featc"><p class="s-stepn" aria-hidden="true">{{f.n}}</p><h3>{{f.t}}</h3><p class="s-p">{{f.d}}</p></li></sc-for>
+    </ol>
+  </div>
+</section>
+<section class="s-sec s-alt s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.paFaqH}}</h2>
+    <div class="s-faq">
+      <sc-for list="{{t.paFaq}}" as="x" hint-placeholder-count="5">
+        <details>
+          <summary><span>{{x.q}}</span><svg class="s-pm" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>{{x.a}}</p>
+        </details>
+      </sc-for>
+    </div>
+    <div class="s-ctas"><a class="a-btn2" href="{{href.pricing}}">{{t.paPrice}}</a></div>
+  </div>
+</section>
+</sc-if>

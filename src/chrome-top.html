@@ -1,0 +1,34 @@
+<div class="up lp" lang="{{lang}}">
+<a class="s-skip" href="#content">{{t.skip}}</a>
+
+<header class="s-nav">
+  <div class="s-nav-in">
+    <a class="s-brand" href="{{href.home}}" aria-label="ENTer"><dc-import name="Logo" size="26" hint-size="106px,26px"></dc-import></a>
+    <nav class="s-links" aria-label="{{t.navAria}}">
+      <sc-for list="{{navItems}}" as="n" hint-placeholder-count="5"><a class="s-nl" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}</a></sc-for>
+    </nav>
+    <a class="s-lang" href="{{href.other}}" hreflang="{{otherLang}}" aria-label="{{t.langTo}}">{{t.langShort}}</a>
+    <a class="s-nl" href="{{href.auth}}">{{t.login}}</a>
+    <a class="a-btn a-btn-s s-nav-cta" href="{{href.onb}}">{{t.start}}</a>
+    <button class="s-icon s-burger" type="button" aria-label="{{t.menuOpen}}" aria-expanded="false" aria-controls="s-menu" data-menu-open=""><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8.500h16M4 15.500h16"></path></svg></button>
+  </div>
+</header>
+
+<div class="s-menu" id="s-menu" hidden="" role="dialog" aria-modal="true" aria-label="{{t.menuAria}}">
+  <div class="s-menu-top">
+    <a class="s-brand" href="{{href.home}}" aria-label="ENTer"><dc-import name="Logo" size="26" hint-size="106px,26px"></dc-import></a>
+    <button class="s-icon" type="button" aria-label="{{t.menuClose}}" data-menu-close=""><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+  </div>
+  <nav class="s-menu-links" aria-label="{{t.navAria}}">
+    <sc-for list="{{navItems}}" as="n" hint-placeholder-count="5"><a href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}</a></sc-for>
+    <div class="s-menu-more"><sc-for list="{{menuMore}}" as="n" hint-placeholder-count="2"><a href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}</a></sc-for></div>
+  </nav>
+  <div class="s-menu-foot">
+    <a class="a-btn" href="{{href.onb}}">{{t.cta}}</a>
+    <a class="a-btn2" href="{{href.auth}}">{{t.login}}</a>
+    <div class="s-menu-lang"><span>{{t.langAria}}</span><div class="a-seg" role="group" aria-label="{{t.langAria}}"><a href="{{href.kkHere}}" hreflang="kk" aria-current="{{seg.kk}}">ҚАЗ</a><a href="{{href.ruHere}}" hreflang="ru" aria-current="{{seg.ru}}">РУС</a></div></div>
+  </div>
+</div>
+
+<div class="s-main">
+<main id="content">

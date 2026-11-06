@@ -1,0 +1,7 @@
+# test screenshots and local copies
+.out/
+.shots/
+publish/
+node_modules/
+# made by build/patch-tpl.py on every build
+src/app/app.final.html

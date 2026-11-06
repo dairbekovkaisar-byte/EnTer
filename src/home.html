@@ -1,0 +1,190 @@
+<sc-if value="{{is.home}}" hint-placeholder-val="{{true}}">
+
+<section class="s-hero" id="top">
+  <h1 class="s-h1">{{t.h1}}</h1>
+  <p class="s-sub">{{t.sub}}</p>
+  <div class="s-ctas">
+    <a class="a-btn" href="{{href.onb}}">{{t.cta}}</a>
+    <a class="s-more" href="#how">{{t.ctaMore}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+  </div>
+  <p class="s-note" style="margin-top: 10px">{{t.ctaNote}}</p>
+
+  <div class="s-try" data-try="" data-ok="{{t.fbOk}}" data-no0="{{no.a}}" data-no1="{{no.b}}" data-no3="{{no.d}}" data-labels="{{mapLabels}}">
+    <div class="s-try-l">
+      <div class="s-try-top">
+        <p class="s-big"><span data-try-score="">{{score}}</span><span class="a-of">/140</span></p>
+        <p class="s-note" style="text-align: right; max-width: 15em">{{t.sample}}</p>
+      </div>
+      <div data-try-map=""><dc-import name="PointsMap" got="{{map.got}}" next="{{map.next}}" labels="{{map.labels}}" aria="{{mapAria}}" hint-size="100%,260px"></dc-import></div>
+      <div class="a-legend"><span class="a-lg"><i class="a-sw" style="background: var(--fill)"></i>{{t.lgHave}}</span><span class="a-lg"><i class="a-sw" style="background: var(--near)"></i>{{t.lgNear}}</span><span class="a-lg"><i class="a-sw" style="background: var(--cell)"></i>{{t.lgLeft}}</span></div>
+    </div>
+    <div class="s-try-r">
+      <p class="s-note" style="font-weight: 600">{{t.tryHint}}</p>
+      <p class="s-q">{{t.q}}</p>
+      <div class="s-opts">
+        <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+          <button type="button" class="a-opt" data-opt="{{$i}}">
+            <span class="a-k"><span class="k-l">{{o.key}}</span><span class="k-ok"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><span class="k-no"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span></span>
+            <span>{{o.text}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div class="s-fb" hidden="" role="status" data-try-fb=""></div>
+      <button type="button" class="s-more s-try-again" hidden="" data-try-again="">{{t.tryAgain}}</button>
+    </div>
+  </div>
+</section>
+
+<section class="s-sec s-alt" id="how">
+  <div class="s-in">
+    <h2 class="s-h2 s-tc">{{t.howH}}</h2>
+    <ol class="s-steps">
+      <li class="s-step">
+        <p class="s-stepn" aria-hidden="true">1</p>
+        <h3 class="s-h3">{{t.how1t}}</h3>
+        <p class="s-p">{{t.how1d}}</p>
+        <div class="s-shot-gap"></div>
+        <div class="s-phone" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="home" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div>
+      </li>
+      <li class="s-step">
+        <p class="s-stepn" aria-hidden="true">2</p>
+        <h3 class="s-h3">{{t.how2t}}</h3>
+        <p class="s-p">{{t.how2d}}</p>
+        <div class="s-shot-gap"></div>
+        <div class="s-phone" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="wrong" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div>
+      </li>
+      <li class="s-step">
+        <p class="s-stepn" aria-hidden="true">3</p>
+        <h3 class="s-h3">{{t.how3t}}</h3>
+        <p class="s-p">{{t.how3d}}</p>
+        <div class="s-shot-gap"></div>
+        <div class="s-phone" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="result" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="s-sec">
+  <div class="s-in">
+    <h2 class="s-h2 s-tc">{{t.insideH}}</h2>
+    <div class="s-bento">
+      <article class="s-tile s-s6 s-tile-shot">
+        <h3 class="s-h3">{{t.b1t}}</h3>
+        <p class="s-p">{{t.b1d}}</p>
+        <a class="s-more" href="{{href.subjects}}">{{t.b1l}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+        <div class="s-shot-gap"></div>
+        <div class="s-phone s-l" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="tasks" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div>
+      </article>
+      <article class="s-tile s-s6 s-tile-shot">
+        <h3 class="s-h3">{{t.b4t}}</h3>
+        <p class="s-p">{{t.b4d}}</p>
+        <div class="s-shot-gap"></div>
+        <div class="s-phone s-l" aria-hidden="true" inert=""><div class="s-phone-in"><dc-import name="App" preset="calendar" embed="{{true}}" min-h="844px" lang="{{lang}}" hint-size="390px,844px"></dc-import></div></div>
+      </article>
+      <article class="s-tile s-s7">
+        <h3 class="s-h3">{{t.b2t}}</h3>
+        <p class="s-p">{{t.b2d}}</p>
+        <div class="s-tile-end">
+          <div class="s-white">
+            <p class="s-verdict">{{t.b2v}}</p>
+            <p style="margin-top: 6px">{{t.b2a}}<mark>Қасым, Есім, Тәуке</mark>.</p>
+            <div class="a-chips"><span class="a-chip">{{t.chip1}}</span><span class="a-chip">{{t.chip2}}</span><span class="a-chip">{{t.chip3}}</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="s-tile s-s5">
+        <h3 class="s-h3">{{t.b3t}}</h3>
+        <p class="s-p">{{t.b3d}}</p>
+        <div class="s-tile-end s-two">
+          <div class="s-white" lang="kk">«Жеті жарғы» заңдар жинағы қай ханның тұсында қабылданды?</div>
+          <div class="s-white" lang="ru">При каком хане был принят свод законов «Жеті жарғы»?</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="s-sec s-alt s-tc">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.pairH}}</h2>
+    <p class="s-sub">{{t.pairSub}}</p>
+    <div class="s-chips" role="group" aria-label="{{t.pairAria}}">
+      <sc-for list="{{pairChips}}" as="c" hint-placeholder-count="12"><button type="button" class="s-chip" aria-pressed="{{c.pressed}}" data-pair-a="{{c.a}}" data-pair-b="{{c.b}}">{{c.label}}</button></sc-for>
+    </div>
+    <div class="s-tbl">
+      <table>
+        <thead><tr><th>{{t.th1}}</th><th>{{t.th2}}</th><th>{{t.th3}}</th><th>{{t.th4}}</th></tr></thead>
+        <tbody>
+          <sc-for list="{{pairRows}}" as="r" hint-placeholder-count="5"><tr class="{{r.cls}}"><td data-prof="{{r.pi}}">{{r.n}}</td><td class="n">{{r.q}}</td><td class="n">{{r.p}}</td><td class="n">{{r.m}}</td></tr></sc-for>
+          <tr class="tot"><td>{{t.total}}</td><td class="n">120</td><td class="n">140</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="s-note" style="margin-top: 14px">{{t.pairNote}}</p>
+    <a class="s-more" href="{{href.subjects}}" style="margin-top: 8px">{{t.pairLink}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+  </div>
+</section>
+
+<section class="s-sec">
+  <div class="s-in">
+    <div class="s-bento" style="margin-top: 0">
+      <article class="s-tile s-s4 s-tile-dark">
+        <h3 class="s-h3">{{t.m1t}}</h3>
+        <p class="s-p">{{t.m1d}}</p>
+        <a class="s-more" href="{{href.mock}}">{{t.m1l}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+        <div class="s-tile-end"><div class="d120" aria-hidden="true"><sc-for list="{{d120}}" as="c" hint-placeholder-count="120"><span class="{{c}}"></span></sc-for></div></div>
+      </article>
+      <article class="s-tile s-s4">
+        <h3 class="s-h3">{{t.m2t}}</h3>
+        <p class="s-p">{{t.m2d}}</p>
+        <a class="s-more" href="{{href.grants}}">{{t.m2l}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+        <div class="s-tile-end">
+          <sc-for list="{{t.m2rows}}" as="r" hint-placeholder-count="3"><div class="s-minirow"><b>{{r.n}}</b><span>{{r.l}}</span></div></sc-for>
+        </div>
+      </article>
+      <article class="s-tile s-s4">
+        <h3 class="s-h3">{{t.m3t}}</h3>
+        <p class="s-p">{{t.m3d}}</p>
+        <a class="s-more" href="{{href.parents}}">{{t.m3l}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+        <div class="s-tile-end"><div class="s-white s-bubble">{{t.reportMsg}}</div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="s-sec s-alt s-tc" id="price">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.prH}}</h2>
+    <div class="s-plans">
+      <article class="s-plan">
+        <h3>{{t.pl1}}</h3>
+        <p class="a-price">{{t.pl1p}}</p>
+        <ul class="s-feat"><sc-for list="{{t.pl1f}}" as="f" hint-placeholder-count="3"><li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+        <a class="a-btn" href="{{href.onb}}">{{t.cta}}</a>
+      </article>
+      <article class="s-plan">
+        <h3>{{t.pl2}}</h3>
+        <p class="a-price">{{t.pl2p}}</p>
+        <ul class="s-feat"><sc-for list="{{t.pl2f}}" as="f" hint-placeholder-count="4"><li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{f}}</span></li></sc-for></ul>
+        <a class="a-btn2" href="{{href.pay}}">{{t.pl2c}}</a>
+      </article>
+    </div>
+    <a class="s-more" href="{{href.pricing}}" style="margin-top: 18px">{{t.prLink}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+  </div>
+</section>
+
+<section class="s-sec s-tc" id="faq">
+  <div class="s-in">
+    <h2 class="s-h2">{{t.faqH}}</h2>
+    <div class="s-faq">
+      <sc-for list="{{t.faq}}" as="x" hint-placeholder-count="6">
+        <details>
+          <summary><span>{{x.q}}</span><svg class="s-pm" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+          <p>{{x.a}}</p>
+        </details>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+</sc-if>

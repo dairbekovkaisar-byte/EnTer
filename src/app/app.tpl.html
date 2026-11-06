@@ -1,0 +1,753 @@
+<div class="up" data-theme="{{theme}}" lang="{{lang}}" style="min-height: {{minH}}">
+<div class="shell {{shellCls}}" style="min-height: {{minH}}">
+
+<sc-if value="{{showNav}}" hint-placeholder-val="{{true}}">
+<nav class="rail" aria-label="{{t.navAria}}">
+  <a class="brandlink raillogo" href="{{landingHref}}" aria-label="ENTer"><dc-import name="Logo" size="28" hint-size="124px,28px"></dc-import></a>
+  <button type="button" class="railitem" aria-current="{{cur.home}}" onClick="{{goHome}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5.500v-6h-5v6H4z"></path></svg>{{t.tabToday}}</button>
+  <button type="button" class="railitem" aria-current="{{cur.tasks}}" onClick="{{goTasks}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10M4 6l1.200 1.200L7 5M4 12l1.200 1.200L7 11M4 18l1.200 1.200L7 17"></path></svg>{{t.tabTasks}}</button>
+  <button type="button" class="railitem" aria-current="{{cur.cal}}" onClick="{{goCalendar}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10.500h16M8 3v4M16 3v4"></path></svg>{{t.tabCal}}</button>
+  <button type="button" class="railitem" aria-current="{{cur.map}}" onClick="{{goMap}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 9.300h16M4 14.600h16M9.300 4v16M14.600 4v16"></path></svg>{{t.tabMap}}</button>
+  <button type="button" class="railitem" aria-current="{{cur.mock}}" onClick="{{goMockIntro}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4.500l3 2M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM9 2.500h6"></path></svg>{{t.tabMock}}</button>
+  <div class="railfoot">
+    <button type="button" class="railitem" aria-current="{{cur.profile}}" onClick="{{goProfile}}"><span class="avatar" style="width: 26px; height: 26px; font-size: 12px" aria-hidden="true">{{t.profileInitial}}</span>{{t.tabProfile}}</button>
+  </div>
+</nav>
+</sc-if>
+
+<main class="main {{mainCls}}">
+
+<sc-if value="{{showTop}}" hint-placeholder-val="{{true}}">
+<header class="top">
+  <h1 class="t2">{{topTitle}}</h1>
+  <div class="topacts">
+    <sc-if value="{{is.calendar}}" hint-placeholder-val="{{false}}"><button type="button" class="iconbtn" aria-label="{{t.calAdd}}" onClick="{{openAdd}}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></sc-if>
+    <button type="button" class="iconbtn ph" style="align-items: center; justify-content: center" aria-label="{{t.tabProfile}}" onClick="{{goProfile}}"><span class="avatar" aria-hidden="true">{{t.profileInitial}}</span></button>
+  </div>
+</header>
+</sc-if>
+
+<sc-if value="{{is.onboard}}" hint-placeholder-val="{{false}}">
+<div class="onb">
+  <div class="onbform">
+    <a class="brandlink" href="{{landingHref}}" aria-label="ENTer"><dc-import name="Logo" size="30" hint-size="130px,30px"></dc-import></a>
+    <h1 class="t1">{{t.onbTitle}}</h1>
+    <fieldset>
+      <legend class="t4">{{t.onbPairQ}}</legend>
+      <div class="pairs">
+        <sc-for list="{{pairs}}" as="p" hint-placeholder-count="6"><button type="button" class="pair" aria-pressed="{{p.pressed}}" onClick="{{p.pick}}">{{p.label}}</button></sc-for>
+      </div>
+      <sc-if value="{{pairsMore}}" hint-placeholder-val="{{true}}"><button type="button" class="lnk" onClick="{{showAllPairs}}">{{t.onbMore}}</button></sc-if>
+    </fieldset>
+    <div>
+      <div class="targetrow"><label class="t4" for="up-target">{{t.onbTargetQ}}</label><span class="targetn">{{target}}</span></div>
+      <input id="up-target" type="range" min="50" max="140" step="5" value="{{target}}" onChange="{{setTarget}}">
+      <p class="sm mut">{{t.onbHint}}</p>
+    </div>
+    <button type="button" class="btn" onClick="{{finishOnboard}}">{{t.onbCta}}</button>
+  </div>
+  <aside class="panel dk" style="flex-direction: column">
+    <dc-import name="PointsMap" got="{{zero}}" next="{{zero}}" labels="{{m.labels}}" hint-size="100%,320px"></dc-import>
+    <p class="sm mut">{{t.onbMapCaption}}</p>
+  </aside>
+</div>
+</sc-if>
+
+<sc-if value="{{is.home}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="hgrid">
+    <section class="panel" aria-label="{{t.tabMap}}">
+      <div class="score">
+        <div>
+          <p class="sm mut">{{t.scoreNow}}</p>
+          <p class="bignum"><span>{{scoreText}}</span><span class="of">/140</span></p>
+        </div>
+        <sc-if value="{{hasData}}" hint-placeholder-val="{{true}}"><p class="goalbox">{{goalText}}</p></sc-if>
+      </div>
+      <dc-import name="PointsMap" got="{{m.got}}" next="{{m.next}}" labels="{{m.labels}}" counts="{{hasData}}" aria="{{mapAria}}" hint-size="100%,210px"></dc-import>
+      <sc-if value="{{hasData}}" hint-placeholder-val="{{true}}">
+        <div class="legend"><span class="lg"><i class="sw sw-f"></i>{{t.lgHave}}</span><span class="lg"><i class="sw sw-n"></i>{{t.lgNear}}</span><span class="lg"><i class="sw sw-e"></i>{{t.lgLeft}}</span></div>
+        <p class="sm mut">{{t.estimate}}</p>
+      </sc-if>
+    </section>
+    <div class="stack">
+      <sc-if value="{{fresh}}" hint-placeholder-val="{{false}}">
+        <section class="sess">
+          <h2 class="t3">{{t.emptyTitle}}</h2>
+          <p class="meta">{{t.emptyText}}</p>
+          <button type="button" class="btn btn-mark" onClick="{{startSession}}">{{t.emptyCta}}</button>
+        </section>
+      </sc-if>
+      <sc-if value="{{showSess}}" hint-placeholder-val="{{true}}">
+        <section class="sess">
+          <h2 class="t3">{{t.sessTitle}}</h2>
+          <p class="meta">{{t.sessMeta}}<br>{{t.sessTopics}}</p>
+          <button type="button" class="btn btn-mark" onClick="{{startSession}}">{{t.sessStart}}</button>
+        </section>
+      </sc-if>
+      <sc-if value="{{doneToday}}" hint-placeholder-val="{{false}}">
+        <section class="panel">
+          <h2 class="t3">{{t.doneTodayTitle}}</h2>
+          <p class="mut">{{t.doneTodayText}}</p>
+          <button type="button" class="btn2" onClick="{{goLimit}}">{{t.more}}</button>
+        </section>
+      </sc-if>
+      <sc-if value="{{hasData}}" hint-placeholder-val="{{true}}">
+        <section class="panel" style="gap: 8px">
+          <h2 class="t4" style="padding-bottom: 6px">{{t.nearTitle}}</h2>
+          <ul class="rows">
+            <sc-for list="{{near}}" as="n" hint-placeholder-count="3">
+              <li><button type="button" class="rowbtn" onClick="{{startSession}}"><span class="plus">{{n.plus}}</span><span><span class="rname">{{n.name}}</span><span class="rsub">{{n.sub}}</span></span></button></li>
+            </sc-for>
+          </ul>
+        </section>
+        <section class="panel">
+          <div class="wk" role="img" aria-label="{{streakText}}"><sc-for list="{{week}}" as="d" hint-placeholder-count="7"><span class="{{d.cls}}">{{d.l}}</span></sc-for></div>
+          <p class="sm">{{streakText}}</p>
+          <p class="sm mut">{{daysLeftText}}</p>
+          <p class="sm mut">{{t.nextMock}}</p>
+          <button type="button" class="lnk" onClick="{{goCalendar}}">{{t.openCal}}</button>
+        </section>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.q}}" hint-placeholder-val="{{false}}">
+<header class="qbar">
+  <button type="button" class="iconbtn" aria-label="{{t.exitAria}}" onClick="{{goHome}}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+  <div class="prog" role="img" aria-label="{{progLabel}}"><sc-for list="{{prog}}" as="c" hint-placeholder-count="10"><span class="{{c}}"></span></sc-for></div>
+  <span class="d" style="flex: none; font-size: 15px">{{progLabel}}</span>
+</header>
+<div class="qwrap {{qCls}}">
+  <section class="qcol">
+    <p class="sm mut b6">{{q.subj}}</p>
+    <sc-if value="{{q.passage}}" hint-placeholder-val="{{false}}"><blockquote class="passage">{{q.passage}}</blockquote></sc-if>
+    <h1 class="qtext">{{q.text}}</h1>
+    <div class="opts">
+      <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+        <button type="button" class="opt {{o.cls}}" disabled="{{checked}}" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}">
+          <span class="k">
+            <sc-if value="{{o.showKey}}" hint-placeholder-val="{{true}}">{{o.key}}</sc-if>
+            <sc-if value="{{o.isOk}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg></sc-if>
+            <sc-if value="{{o.isNo}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
+          </span>
+          <span>{{o.text}}</span>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{notChecked}}" hint-placeholder-val="{{true}}"><button type="button" class="lnk">{{t.report}}</button></sc-if>
+  </section>
+  <sc-if value="{{checked}}" hint-placeholder-val="{{false}}">
+    <aside class="tutor" aria-live="polite">
+      <p class="verdict {{vCls}}">
+        <sc-if value="{{isRight}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg></sc-if>
+        <sc-if value="{{isWrong}}" hint-placeholder-val="{{true}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
+        <span>{{verdict}}</span>
+      </p>
+      <sc-if value="{{exp.title}}" hint-placeholder-val="{{true}}"><h2 class="b6">{{exp.title}}</h2></sc-if>
+      <p>{{exp.a}}<sc-if value="{{exp.m}}" hint-placeholder-val="{{true}}"><mark>{{exp.m}}</mark></sc-if>{{exp.b}}</p>
+      <div class="chips">
+        <sc-for list="{{chips}}" as="c" hint-placeholder-count="3"><button type="button" class="chip" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for>
+      </div>
+      <sc-if value="{{chipLoad}}" hint-placeholder-val="{{false}}"><div class="dots" role="status"><span class="dotsrow"><i></i><i></i><i></i></span><span>{{t.tutorLoading}}</span></div></sc-if>
+      <sc-if value="{{chipErr}}" hint-placeholder-val="{{false}}"><div class="chiperr" role="alert"><span>{{t.tutorError}}</span><button type="button" class="btn2 btn-s" onClick="{{chipRetry}}">{{t.retry}}</button></div></sc-if>
+      <sc-if value="{{chipOk}}" hint-placeholder-val="{{false}}"><p class="chipres">{{chipText}}</p></sc-if>
+    </aside>
+  </sc-if>
+</div>
+<footer class="qfoot">
+  <button type="button" class="btn" disabled="{{cantGo}}" onClick="{{primary}}">{{primaryLabel}}</button>
+</footer>
+</sc-if>
+
+<sc-if value="{{is.done}}" hint-placeholder-val="{{false}}">
+<div class="page" style="flex: 1 1 auto; justify-content: center">
+  <div class="dgrid">
+    <div class="stack">
+      <h1 class="t1">{{t.doneTitle}}</h1>
+      <p class="jump"><span class="mut">54</span><svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17M14 6l6 6-6 6"></path></svg><span style="color: var(--blue)">{{doneScore}}</span></p>
+      <p class="t4">{{doneLine}}</p>
+      <p class="mut">{{t.doneTomorrow}}</p>
+      <sc-if value="{{canSave}}" hint-placeholder-val="{{true}}"><button type="button" class="lnk" onClick="{{saveByPhone}}">{{t.saveResult}}</button></sc-if>
+      <div class="acts" style="flex-direction: column; align-items: stretch; max-width: 420px">
+        <button type="button" class="btn" onClick="{{finishDone}}">{{t.toHome}}</button>
+        <button type="button" class="btn2" onClick="{{goShare}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M5 12v9h14v-9"></path></svg>{{t.shareMap}}</button>
+      </div>
+    </div>
+    <section class="panel">
+      <dc-import name="PointsMap" got="{{m.got}}" next="{{m.next}}" labels="{{m.labels}}" aria="{{mapAria}}" hint-size="100%,210px"></dc-import>
+      <div class="legend"><span class="lg"><i class="sw sw-f"></i>{{t.lgHave}}</span><span class="lg"><i class="sw sw-n"></i>{{t.lgNear}}</span><span class="lg"><i class="sw sw-e"></i>{{t.lgLeft}}</span></div>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.map}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="mgrid2">
+    <section class="panel">
+      <p class="sm mut">{{t.mapHint}}</p>
+      <dc-import name="PointsMap" got="{{m.got}}" next="{{m.next}}" labels="{{m.labels}}" selected="{{block}}" on-pick="{{pickBlock}}" hint-size="100%,210px"></dc-import>
+      <div class="legend"><span class="lg"><i class="sw sw-f"></i>{{t.lgHave}}</span><span class="lg"><i class="sw sw-n"></i>{{t.lgNear}}</span><span class="lg"><i class="sw sw-e"></i>{{t.lgLeft}}</span></div>
+    </section>
+    <section class="panel" style="gap: 8px">
+      <h2 class="t3" style="padding-bottom: 6px">{{blockName}}</h2>
+      <sc-if value="{{hasTopics}}" hint-placeholder-val="{{true}}">
+        <ul>
+          <sc-for list="{{topics}}" as="tp" hint-placeholder-count="5">
+            <li class="topic">
+              <span class="b6">{{tp.name}}</span>
+              <span class="num">{{tp.count}}</span>
+              <span class="tcells" aria-hidden="true"><sc-for list="{{tp.cells}}" as="c" hint-placeholder-count="4"><span class="{{c}}"></span></sc-for></span>
+            </li>
+          </sc-for>
+        </ul>
+      </sc-if>
+      <sc-if value="{{noTopics}}" hint-placeholder-val="{{false}}"><p class="mut">{{t.topicsPlaceholder}}</p></sc-if>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.mockIntro}}" hint-placeholder-val="{{false}}">
+<div class="page" style="max-width: 860px">
+  <p class="mut" style="max-width: 62ch">{{t.mockLead}}</p>
+  <div class="facts">
+    <div class="fact"><span class="factn">120</span><span class="sm mut">{{t.factTasks}}</span></div>
+    <div class="fact"><span class="factn">4</span><span class="sm mut">{{t.factHours}}</span></div>
+    <div class="fact"><span class="factn">140</span><span class="sm mut">{{t.factPoints}}</span></div>
+  </div>
+  <p class="sm mut" style="max-width: 62ch">{{t.mockAllowed}}</p>
+  <div style="display: flex; flex-wrap: wrap; gap: 8px">
+    <button type="button" class="btn" style="flex: 1 1 280px; max-width: 420px" onClick="{{goMock}}">{{t.mockStart}}</button>
+  </div>
+  <section class="panel" style="max-width: 420px; gap: 2px">
+    <h2 class="t4">{{t.mockLast}}</h2>
+    <button type="button" class="lnk" onClick="{{goResult}}">{{t.mockLastOpen}}</button>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{is.mock}}" hint-placeholder-val="{{false}}">
+<header class="mbar">
+  <button type="button" class="iconbtn" aria-label="{{t.pauseAria}}" onClick="{{goMockIntro}}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+  <p class="timer" role="timer" aria-label="{{t.timeLeft}}">3:12:40</p>
+  <span class="grow"></span>
+  <button type="button" class="iconbtn ph" aria-label="{{t.allTasks}}" onClick="{{openNav}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg></button>
+  <button type="button" class="btn2 btn-s" onClick="{{askFinish}}">{{t.finish}}</button>
+</header>
+<sc-if value="{{offline}}" hint-placeholder-val="{{false}}">
+  <div class="offline" role="status"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M8.500 16.500a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5-2.700M19 13a10 10 0 0 0-3-2M2 9a15 15 0 0 1 4-2.500M22 9a15 15 0 0 0-11-3.900M12 20h.01"></path></svg><span>{{t.offline}}</span></div>
+</sc-if>
+<nav class="msubj" aria-label="{{t.subjAria}}">
+  <sc-for list="{{subjTabs}}" as="s" hint-placeholder-count="5"><button type="button" ref="{{s.ref}}" aria-current="{{s.cur}}" onClick="{{s.pick}}">{{s.label}}<span class="d">{{s.count}}</span></button></sc-for>
+</nav>
+<div class="mgrid">
+  <section class="mq {{mqCls}}">
+    <sc-if value="{{mq.passage}}" hint-placeholder-val="{{false}}"><blockquote class="passage">{{mq.passage}}</blockquote></sc-if>
+    <div class="mq-col">
+      <p class="sm mut b6">{{mqNum}}</p>
+      <h1 class="qtext">{{mq.text}}</h1>
+      <sc-if value="{{mq.multi}}" hint-placeholder-val="{{false}}"><p class="sm mut">{{t.multiHint}}</p></sc-if>
+      <div class="opts">
+        <sc-for list="{{mqOpts}}" as="o" hint-placeholder-count="4">
+          <button type="button" class="opt {{o.cls}}" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}"><span class="k">{{o.key}}</span><span>{{o.text}}</span></button>
+        </sc-for>
+      </div>
+      <div class="toolsrow ph">
+        <button type="button" class="tool" onClick="{{toolCalc}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"></path></svg>{{t.toolCalc}}</button>
+        <button type="button" class="tool" onClick="{{toolPeriodic}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h6v6H3zM15 5h6v6h-6zM3 11h18v8H3zM9 11v8M15 11v8"></path></svg>{{t.toolPeriodic}}</button>
+        <button type="button" class="tool" onClick="{{toolSol}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 9.300h16M4 14.600h16M9.300 4v16M14.600 4v16"></path></svg>{{t.toolSol}}</button>
+      </div>
+    </div>
+  </section>
+  <aside class="navside" aria-label="{{t.allTasks}}">
+    <sc-for list="{{navGroups}}" as="g" hint-placeholder-count="5">
+      <div class="ngroup">
+        <p class="sm" style="display: flex; justify-content: space-between; gap: 8px"><span class="b6">{{g.label}}</span><span class="num mut" style="font-size: 14px">{{g.count}}</span></p>
+        <div class="navgrid"><sc-for list="{{g.items}}" as="c" hint-placeholder-count="10"><button type="button" class="ncell {{c.cls}}" aria-label="{{c.aria}}" onClick="{{c.go}}">{{c.n}}</button></sc-for></div>
+      </div>
+    </sc-for>
+    <div class="legend"><span class="lg"><i class="sw sw-f"></i>{{t.navAnswered}}</span><span class="lg"><i class="sw sw-n"></i>{{t.navFlagged}}</span><span class="lg"><i class="sw sw-e"></i>{{t.navEmpty}}</span></div>
+    <div class="toolsrow" style="flex-direction: column; margin: 0">
+      <button type="button" class="tool" onClick="{{toolCalc}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"></path></svg>{{t.toolCalc}}</button>
+      <button type="button" class="tool" onClick="{{toolPeriodic}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h6v6H3zM15 5h6v6h-6zM3 11h18v8H3zM9 11v8M15 11v8"></path></svg>{{t.toolPeriodicLong}}</button>
+      <button type="button" class="tool" onClick="{{toolSol}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 9.300h16M4 14.600h16M9.300 4v16M14.600 4v16"></path></svg>{{t.toolSolLong}}</button>
+    </div>
+  </aside>
+</div>
+<footer class="mfoot">
+  <button type="button" class="btn2 btn-s" onClick="{{mPrev}}">{{t.prev}}</button>
+  <button type="button" class="btn2 btn-s" aria-pressed="{{mFlagged}}" onClick="{{mFlag}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="{{mFlagFill}}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4h12l-3 4 3 4H6"></path></svg>{{mFlagLabel}}</button>
+  <button type="button" class="btn btn-s mnext" onClick="{{mNext}}">{{t.nextQ}}</button>
+</footer>
+<sc-if value="{{navOpen}}" hint-placeholder-val="{{false}}">
+  <div class="layer">
+    <button type="button" class="scrim" aria-label="{{t.close}}" onClick="{{closeLayer}}"></button>
+    <div class="box" role="dialog" aria-modal="true" aria-label="{{t.allTasks}}">
+      <div class="boxhead"><h2 class="t3">{{t.allTasks}}</h2><button type="button" class="iconbtn" aria-label="{{t.close}}" onClick="{{closeLayer}}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+      <div class="legend"><span class="lg"><i class="sw sw-f"></i>{{t.navAnswered}}</span><span class="lg"><i class="sw sw-n"></i>{{t.navFlagged}}</span><span class="lg"><i class="sw sw-e"></i>{{t.navEmpty}}</span></div>
+      <sc-for list="{{navGroups}}" as="g" hint-placeholder-count="5">
+        <div class="ngroup">
+          <p class="sm" style="display: flex; justify-content: space-between; gap: 8px"><span class="b6">{{g.label}}</span><span class="num mut" style="font-size: 14px">{{g.count}}</span></p>
+          <div class="navgrid"><sc-for list="{{g.items}}" as="c" hint-placeholder-count="10"><button type="button" class="ncell {{c.cls}}" aria-label="{{c.aria}}" onClick="{{c.go}}">{{c.n}}</button></sc-for></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{confirm}}" hint-placeholder-val="{{false}}">
+  <div class="layer">
+    <button type="button" class="scrim" aria-label="{{t.close}}" onClick="{{closeLayer}}"></button>
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="up-confirm">
+      <h2 class="t3" id="up-confirm">{{t.confirmTitle}}</h2>
+      <p class="mut">{{confirmText}}</p>
+      <div class="acts">
+        <button type="button" class="btn" onClick="{{closeLayer}}">{{t.confirmBack}}</button>
+        <button type="button" class="btn2" onClick="{{goResult}}">{{t.confirmYes}}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{toolOpen}}" hint-placeholder-val="{{false}}">
+  <div class="layer">
+    <button type="button" class="scrim" aria-label="{{t.close}}" onClick="{{closeLayer}}"></button>
+    <div class="box" role="dialog" aria-modal="true" aria-label="{{toolTitle}}">
+      <div class="boxhead"><h2 class="t3">{{toolTitle}}</h2><button type="button" class="iconbtn" aria-label="{{t.close}}" onClick="{{closeLayer}}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+      <p class="mut">{{t.toolSoon}}</p>
+    </div>
+  </div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{is.result}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="rgrid">
+    <div class="stack">
+      <section class="panel">
+        <p class="bignum"><span>54</span><span class="of">/140</span></p>
+        <dc-import name="PointsMap" got="{{res.got}}" next="{{res.next}}" labels="{{m.labels}}" aria="54 / 140" hint-size="100%,210px"></dc-import>
+        <p class="sm mut">{{t.resultNote}}</p>
+      </section>
+      <section class="panel" style="gap: 8px">
+        <h2 class="t4" style="padding-bottom: 6px">{{t.lostTitle}}</h2>
+        <ul class="rows">
+          <sc-for list="{{t.lost}}" as="n" hint-placeholder-count="3">
+            <li class="thr"><span class="b6">{{n.name}}</span><span class="num">{{n.pts}}</span></li>
+          </sc-for>
+        </ul>
+        <div class="acts" style="flex-direction: column; align-items: stretch; margin-top: 8px">
+          <button type="button" class="btn" onClick="{{startSession}}">{{t.review}}</button>
+        </div>
+      </section>
+    </div>
+    <div class="stack">
+      <section class="panel" style="gap: 6px">
+        <h2 class="t4">{{t.bySubject}}</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead><tr><th>{{t.thSubject}}</th><th>{{t.thPoints}}</th><th>{{t.thMin}}</th></tr></thead>
+            <tbody>
+              <sc-for list="{{resRows}}" as="r" hint-placeholder-count="5">
+                <tr><td>{{r.name}}</td><td class="num">{{r.pts}}</td><td><span class="okmark num"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg>{{r.min}}</span></td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel" style="gap: 6px">
+        <h2 class="t4" style="padding-bottom: 6px">{{t.thrTitle}}</h2>
+        <ul>
+          <sc-for list="{{resThr}}" as="r" hint-placeholder-count="5">
+            <li class="thr"><span><span class="num">{{r.min}}</span> <span>{{r.label}}</span></span><span class="st {{r.cls}}">{{r.state}}</span></li>
+          </sc-for>
+        </ul>
+        <p class="sm mut" style="padding-top: 8px">{{t.thrNote}}</p>
+      </section>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.limit}}" hint-placeholder-val="{{false}}">
+<div class="center">
+  <div class="narrow panel" style="padding: 24px">
+    <h1 class="t2">{{t.limitTitle}}</h1>
+    <p class="mut">{{t.limitText}}</p>
+    <p class="price">{{t.price}}</p>
+    <div class="acts" style="flex-direction: column; align-items: stretch">
+      <button type="button" class="btn" onClick="{{goPay}}">{{t.unlock}}</button>
+      <button type="button" class="btn2"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 21 4l-6 17-3-7z"></path></svg>{{t.askParent}}</button>
+      <button type="button" class="lnk" style="justify-content: center" onClick="{{goHome}}">{{t.comeback}}</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.share}}" hint-placeholder-val="{{false}}">
+<div class="center" style="flex-direction: column; gap: 18px">
+  <div class="card">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+      <span class="t4">{{t.cardTop}}</span>
+      <dc-import name="Logo" kind="mark" size="30" lit="#FF9F0A" hint-size="30px,30px"></dc-import>
+    </div>
+    <div>
+      <p style="font-size: 104px; font-weight: 700; line-height: 1; letter-spacing: -.05em">{{shareScore}}</p>
+      <p style="display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 500; color: #A1A1A6">/140 <span style="padding: 3px 12px; border-radius: 980px; background: #FF9F0A; color: #1D1D1F; font-size: 15px; font-weight: 600">{{shareGain}}</span></p>
+    </div>
+    <dc-import name="PointsMap" got="{{m.got}}" next="{{m.next}}" labels="{{m.labels}}" show-labels="{{false}}" row-gap="6" mid-gap="8" cell-gap="2" aria="{{mapAria}}" hint-size="100%,130px"></dc-import>
+    <dc-import name="Logo" kind="word" size="26" lit="#FF9F0A" hint-size="82px,26px"></dc-import>
+  </div>
+  <p class="sm mut" style="text-align: center; max-width: 34ch">{{t.shareLead}}</p>
+  <div class="narrow" style="max-width: 306px; gap: 8px">
+    <button type="button" class="btn">{{t.shareSend}}</button>
+    <button type="button" class="btn2">{{t.shareSave}}</button>
+    <button type="button" class="lnk" style="justify-content: center" onClick="{{goDone}}">{{t.back}}</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.tasks}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="segw {{segCls}}" role="group" aria-label="{{t.titleTasks}}" style="max-width: 520px">
+    <sc-for list="{{tasksTabs}}" as="x" hint-placeholder-count="3"><button type="button" aria-pressed="{{x.pressed}}" onClick="{{x.pick}}">{{x.label}}</button></sc-for>
+  </div>
+
+  <sc-if value="{{tab.topics}}" hint-placeholder-val="{{true}}">
+    <div class="tgrid {{tgridCls}}">
+      <div class="stack tlist">
+        <label class="search">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 16l5 5M18 10.500a7.500 7.500 0 1 1-15 0 7.500 7.500 0 0 1 15 0z"></path></svg>
+          <input type="search" placeholder="{{t.searchPh}}" aria-label="{{t.searchAria}}" value="{{query}}" onChange="{{setQuery}}">
+        </label>
+        <div class="caps" role="group" aria-label="{{t.subjAria}}">
+          <sc-for list="{{subjCaps}}" as="c" hint-placeholder-count="5"><button type="button" class="cap" ref="{{c.ref}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for>
+        </div>
+        <section class="panel" style="gap: 0; padding-block: 8px">
+          <sc-if value="{{hasRows}}" hint-placeholder-val="{{true}}">
+            <ul class="tlistul">
+              <sc-for list="{{topicRows}}" as="r" hint-placeholder-count="5">
+                <li>
+                  <button type="button" class="trow" aria-current="{{r.cur}}" onClick="{{r.pick}}">
+                    <span class="tmain"><span class="rname">{{r.name}}</span><span class="rsub">{{r.meta}}</span><span class="bar"><i style="width: {{r.pct}}%"></i></span></span>
+                    <sc-if value="{{r.plus}}" hint-placeholder-val="{{false}}"><span class="plus">{{r.plus}}</span></sc-if>
+                  </button>
+                </li>
+              </sc-for>
+            </ul>
+          </sc-if>
+          <sc-if value="{{noRows}}" hint-placeholder-val="{{false}}">
+            <div class="empty"><p>{{emptySearch}}</p><button type="button" class="btn2 btn-s" onClick="{{clearQuery}}">{{t.clearSearch}}</button></div>
+          </sc-if>
+        </section>
+      </div>
+
+      <section class="panel tdetail" aria-label="{{tp.name}}">
+        <button type="button" class="lnk ph" style="align-self: flex-start; align-items: center; gap: 2px" onClick="{{closeTopic}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>{{t.toTasks}}</button>
+        <div>
+          <p class="sm mut b6">{{tp.subj}}</p>
+          <h2 class="t2" style="margin-top: 2px">{{tp.name}}</h2>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="statn">{{tp.solved}}</span><span class="statl">{{tp.solvedL}}</span></div>
+          <div class="stat"><span class="statn">{{tp.acc}}</span><span class="statl">{{t.statAcc}}</span></div>
+          <div class="stat"><span class="statn">{{tp.near}}</span><span class="statl">{{t.statNear}}</span></div>
+        </div>
+        <div class="acts2">
+          <button type="button" class="btn" onClick="{{startSession}}">{{t.solveAll}}</button>
+          <sc-if value="{{tp.wrong}}" hint-placeholder-val="{{true}}"><button type="button" class="btn2" onClick="{{startSession}}">{{tp.wrongLabel}}</button></sc-if>
+        </div>
+        <sc-if value="{{tp.hasNotes}}" hint-placeholder-val="{{true}}">
+          <details class="notes">
+            <summary><span>{{t.notesTitle}}</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></summary>
+            <ul><sc-for list="{{t.khNotes}}" as="n" hint-placeholder-count="4"><li>{{n}}</li></sc-for></ul>
+          </details>
+        </sc-if>
+        <h3 class="t4" style="margin-top: 4px">{{t.tasksTitle}}</h3>
+        <sc-if value="{{tp.hasTasks}}" hint-placeholder-val="{{true}}">
+          <ul class="tasks">
+            <sc-for list="{{tp.tasks}}" as="x" hint-placeholder-count="6">
+              <li class="task">
+                <button type="button" class="taskbtn" onClick="{{startSession}}">
+                  <span class="sdot {{x.stCls}}" role="img" aria-label="{{x.stAria}}">
+                    <sc-if value="{{x.isOk}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg></sc-if>
+                    <sc-if value="{{x.isNo}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
+                  </span>
+                  <span style="min-width: 0"><span class="tq">{{x.text}}</span><span class="rsub" style="margin-top: 2px">{{x.meta}}</span></span>
+                </button>
+                <button type="button" class="iconbtn" aria-label="{{x.saveAria}}" aria-pressed="{{x.saved}}" onClick="{{x.toggle}}" style="color: {{x.saveColor}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="{{x.saveFill}}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4.500L6 21z"></path></svg></button>
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+        <sc-if value="{{tp.noTasks}}" hint-placeholder-val="{{false}}"><p class="mut">{{t.topicNoTasks}}</p></sc-if>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{tab.mistakes}}" hint-placeholder-val="{{false}}">
+    <section class="panel" style="max-width: 860px">
+      <div>
+        <h2 class="t3">{{t.mistCta}}</h2>
+        <p class="sm mut" style="margin-top: 2px">{{t.mistLead}}</p>
+      </div>
+      <button type="button" class="btn" style="align-self: flex-start" onClick="{{startSession}}">{{t.mistStart}}</button>
+    </section>
+    <section class="panel" style="gap: 0; padding-block: 8px; max-width: 860px">
+      <ul class="mistlist">
+        <sc-for list="{{t.mistakes}}" as="m" hint-placeholder-count="4">
+          <li>
+            <div class="mist">
+              <p class="sm mut b6">{{m.subj}}</p>
+              <p class="tq" style="font-weight: 500">{{m.q}}</p>
+              <p class="mistline"><span class="mistk">{{t.yourAns}}</span><span class="mistno">{{m.your}}</span></p>
+              <p class="mistline"><span class="mistk">{{t.rightAns}}</span><span class="mistok">{{m.right}}</span></p>
+              <p class="sm mut">{{m.when}}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{tab.saved}}" hint-placeholder-val="{{false}}">
+    <section class="panel" style="gap: 0; padding-block: 8px; max-width: 860px">
+      <sc-if value="{{hasSaved}}" hint-placeholder-val="{{false}}">
+        <ul class="tasks">
+          <sc-for list="{{savedRows}}" as="x" hint-placeholder-count="2">
+            <li class="task">
+              <button type="button" class="taskbtn" onClick="{{startSession}}"><span style="min-width: 0"><span class="tq">{{x.text}}</span><span class="rsub" style="margin-top: 2px">{{x.meta}}</span></span></button>
+              <button type="button" class="iconbtn" aria-label="{{t.savedAria}}" aria-pressed="true" onClick="{{x.toggle}}" style="color: var(--accent-text)"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4.500L6 21z"></path></svg></button>
+            </li>
+          </sc-for>
+        </ul>
+      </sc-if>
+      <sc-if value="{{noSaved}}" hint-placeholder-val="{{true}}">
+        <div class="empty">
+          <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4.500L6 21z"></path></svg>
+          <h2 class="t3">{{t.savedEmptyT}}</h2>
+          <p class="mut" style="max-width: 34ch">{{t.savedEmptyD}}</p>
+          <button type="button" class="btn2 btn-s" onClick="{{tabTopics}}">{{t.toTopics}}</button>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{is.calendar}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="calgrid">
+    <section class="panel calpanel">
+      <div class="calhead">
+        <h2 class="t3">{{calTitle}}</h2>
+        <div class="calnav">
+          <button type="button" class="btn2 btn-s" style="margin-right: 4px" onClick="{{calToToday}}">{{t.calToday}}</button>
+          <button type="button" class="iconbtn" aria-label="{{t.calPrev}}" onClick="{{calPrev}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+          <button type="button" class="iconbtn" aria-label="{{t.calNext}}" onClick="{{calNext}}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></button>
+        </div>
+      </div>
+      <div class="dow" aria-hidden="true"><sc-for list="{{t.dowShort}}" as="d" hint-placeholder-count="7"><span>{{d}}</span></sc-for></div>
+      <div class="month" role="group" aria-label="{{calTitle}}">
+        <sc-for list="{{calCells}}" as="c" hint-placeholder-count="35">
+          <button type="button" class="day {{c.cls}}" aria-label="{{c.aria}}" aria-pressed="{{c.sel}}" onClick="{{c.pick}}"><span class="dn">{{c.n}}</span><span class="dl">{{c.label}}</span><i class="dm" aria-hidden="true"></i></button>
+        </sc-for>
+      </div>
+      <div class="legend">
+        <span class="lg"><i class="sw sw-f"></i>{{t.lgDone}}</span>
+        <span class="lg"><i class="sw" style="background: var(--no-fill)"></i>{{t.lgMiss}}</span>
+        <span class="lg"><i class="sw" style="background: var(--text)"></i>{{t.evMock}}</span>
+        <span class="lg"><i class="sw sw-n"></i>{{t.evExam}}</span>
+      </div>
+    </section>
+    <div class="stack">
+      <section class="panel" style="gap: 6px">
+        <h2 class="t3">{{calSelTitle}}</h2>
+        <ul class="agenda">
+          <sc-for list="{{agenda}}" as="a" hint-placeholder-count="2">
+            <li>
+              <p class="agt"><sc-if value="{{a.time}}" hint-placeholder-val="{{false}}"><span class="agtime">{{a.time}}</span></sc-if>{{a.title}}</p>
+              <sc-if value="{{a.sub}}" hint-placeholder-val="{{true}}"><p class="ags">{{a.sub}}</p></sc-if>
+              <sc-if value="{{a.cta}}" hint-placeholder-val="{{false}}"><button type="button" class="{{a.ctaCls}} btn-s agact" onClick="{{a.go}}">{{a.cta}}</button></sc-if>
+            </li>
+          </sc-for>
+        </ul>
+        <sc-if value="{{agendaEmpty}}" hint-placeholder-val="{{false}}"><p class="mut" style="padding: 8px 0">{{t.ag.none}}</p></sc-if>
+        <button type="button" class="btn2 btn-s" style="margin-top: 6px" onClick="{{openAdd}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>{{t.calAdd}}</button>
+      </section>
+      <section class="panel" style="gap: 8px">
+        <p class="pacen">{{paceTitle}}</p>
+        <p class="sm mut">{{paceLine}}</p>
+        <span class="bar" style="height: 7px"><i style="width: {{pacePct}}%"></i></span>
+      </section>
+      <section class="panel" style="gap: 4px">
+        <h2 class="t4" style="padding-bottom: 4px">{{t.upcoming}}</h2>
+        <ul class="upclist">
+          <sc-for list="{{upcoming}}" as="u" hint-placeholder-count="3"><li><div class="upc"><span class="b6">{{u.title}}</span><span class="sm mut" style="text-align: right">{{u.date}}</span></div></li></sc-for>
+        </ul>
+        <button type="button" class="lnk">{{t.syncCal}}</button>
+      </section>
+    </div>
+  </div>
+</div>
+<sc-if value="{{addOpen}}" hint-placeholder-val="{{false}}">
+  <div class="layer">
+    <button type="button" class="scrim" aria-label="{{t.addCancel}}" onClick="{{closeAdd}}"></button>
+    <form class="box" role="dialog" aria-modal="true" aria-labelledby="up-add" onSubmit="{{saveAdd}}">
+      <h2 class="t3" id="up-add">{{t.addT}}</h2>
+      <div class="field"><label for="up-add-name">{{t.addName}}</label><input id="up-add-name" class="inp" type="text" placeholder="{{t.addPh}}" value="{{addTitle}}" onChange="{{setAddTitle}}"></div>
+      <div class="row2">
+        <div class="field"><label for="up-add-date">{{t.addDate}}</label><input id="up-add-date" class="inp" type="date" value="{{addDate}}" onChange="{{setAddDate}}"></div>
+        <div class="field"><label for="up-add-time">{{t.addTime}}</label><input id="up-add-time" class="inp" type="time" value="{{addTime}}" onChange="{{setAddTime}}"></div>
+      </div>
+      <div class="swrow"><label for="up-add-rem">{{t.addRemind}}</label><input id="up-add-rem" class="switch" type="checkbox" role="switch" checked="{{addRemind}}" onChange="{{toggleAddRemind}}"></div>
+      <div class="acts">
+        <button type="submit" class="btn" disabled="{{addDisabled}}">{{t.addSave}}</button>
+        <button type="button" class="btn2" onClick="{{closeAdd}}">{{t.addCancel}}</button>
+      </div>
+    </form>
+  </div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{is.profile}}" hint-placeholder-val="{{false}}">
+<div class="page">
+  <div class="pgrid">
+    <div class="who">
+      <span class="avatar" aria-hidden="true">{{t.profileInitial}}</span>
+      <div><p class="t4">{{t.profileName}}</p><p class="sm mut">{{t.profilePhone}}</p></div>
+    </div>
+    <div class="gapb">
+      <h2 class="grouphead">{{t.grpPrep}}</h2>
+      <div class="grp">
+        <button type="button" class="lrow" onClick="{{goOnboard}}"><span>{{t.rowSubjects}}</span><span class="lval">{{pairLabel}}</span></button>
+        <button type="button" class="lrow" onClick="{{goOnboard}}"><span>{{t.goal}}</span><span class="lval">{{target}}</span></button>
+        <div class="lrow"><label for="up-exam">{{t.rowExamDate}}</label><input id="up-exam" class="inp" type="date" value="{{examIso}}" onChange="{{setExam}}"></div>
+      </div>
+      <h2 class="grouphead" style="margin-top: 10px">{{t.grpParents}}</h2>
+      <div class="grp">
+        <div class="swrow"><label for="up-parent">{{t.rowParentReport}}</label><input id="up-parent" class="switch" type="checkbox" role="switch" checked="{{parentOn}}" onChange="{{toggleParent}}"></div>
+        <div class="lrow"><span>{{t.rowParentPhone}}</span><span class="lval">{{t.parentPhone}}</span></div>
+      </div>
+    </div>
+    <div class="gapb">
+      <h2 class="grouphead">{{t.grpApp}}</h2>
+      <div class="grp">
+        <div class="lrow"><span>{{t.rowLang}}</span><div class="seg" role="group" aria-label="{{t.langAria}}"><button type="button" aria-pressed="{{seg.kk}}" onClick="{{setKk}}">ҚАЗ</button><button type="button" aria-pressed="{{seg.ru}}" onClick="{{setRu}}">РУС</button></div></div>
+        <div class="lrow"><span>{{t.rowTheme}}</span><div class="seg" role="group" aria-label="{{t.rowTheme}}"><button type="button" aria-pressed="{{themeSeg.day}}" onClick="{{setDay}}">{{t.themeDay}}</button><button type="button" aria-pressed="{{themeSeg.night}}" onClick="{{setNight}}">{{t.themeNight}}</button></div></div>
+        <div class="swrow"><label for="up-rem">{{t.rowRemind}}</label><input id="up-rem" class="switch" type="checkbox" role="switch" checked="{{remindOn}}" onChange="{{toggleRemind}}"></div>
+        <div class="lrow"><label for="up-rem-time">{{t.rowRemindTime}}</label><input id="up-rem-time" class="inp" type="time" value="{{remindTime}}" onChange="{{setRemindTime}}"></div>
+      </div>
+      <h2 class="grouphead" style="margin-top: 10px">{{t.grpPlan}}</h2>
+      <div class="grp">
+        <div class="lrow"><span>{{t.rowPlan}}</span><span class="lval">{{planLabel}}</span></div>
+        <button type="button" class="lrow" style="color: var(--accent-text)" onClick="{{goPay}}"><span>{{t.unlock}}</span></button>
+        <a class="lrow lrow-a" href="{{helpHref}}"><span>{{t.rowSupport}}</span></a>
+        <a class="lrow lrow-a" href="{{legalHref}}"><span>{{t.rowDocs}}</span></a>
+        <button type="button" class="lrow danger" onClick="{{goAuth}}"><span>{{t.rowLogout}}</span></button>
+        <button type="button" class="lrow danger" onClick="{{askDelete}}"><span>{{t.rowDelete}}</span></button>
+      </div>
+      <sc-if value="{{delOpen}}" hint-placeholder-val="{{false}}">
+        <div class="layer">
+          <button type="button" class="scrim" aria-label="{{t.close}}" onClick="{{closeDelete}}"></button>
+          <div class="box" role="dialog" aria-modal="true" aria-labelledby="up-del">
+            <h2 class="t3" id="up-del">{{t.delT}}</h2>
+            <p class="mut">{{t.delD}}</p>
+            <div class="acts">
+              <button type="button" class="btn" onClick="{{closeDelete}}">{{t.delKeep}}</button>
+              <button type="button" class="btn2 danger" onClick="{{doDelete}}">{{t.delYes}}</button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.auth}}" hint-placeholder-val="{{false}}">
+<div class="auth">
+  <form class="authbox" onSubmit="{{sendCode}}">
+    <a class="brandlink" href="{{landingHref}}" aria-label="ENTer"><dc-import name="Logo" size="30" hint-size="130px,30px"></dc-import></a>
+    <sc-if value="{{authPhone}}" hint-placeholder-val="{{true}}">
+      <h1 class="t1">{{t.authT}}</h1>
+      <p class="mut">{{t.authLead}}</p>
+      <div class="field">
+        <label for="up-phone">{{t.authPhone}}</label>
+        <div class="phone-row"><span aria-hidden="true">+7</span><input id="up-phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="701 555 01 24" value="{{phone}}" onChange="{{setPhone}}"></div>
+      </div>
+      <button type="submit" class="btn" disabled="{{phoneShort}}">{{t.authCta}}</button>
+      <p class="sm mut">{{t.authLegalA}} <a class="authlink" href="{{legalHref}}">{{t.authLegalB}}</a>{{t.authLegalC}}</p>
+    </sc-if>
+    <sc-if value="{{authCode}}" hint-placeholder-val="{{false}}">
+      <h1 class="t1">{{t.codeT}}</h1>
+      <p class="mut">{{codeLead}}</p>
+      <div class="codebox">
+        <sc-for list="{{codeCells}}" as="c" hint-placeholder-count="4"><span class="ccell {{c.cls}}" aria-hidden="true">{{c.v}}</span></sc-for>
+        <input class="codeinp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" aria-label="{{t.codeT}}" value="{{code}}" onChange="{{setCode}}">
+      </div>
+      <sc-if value="{{codeBad}}" hint-placeholder-val="{{false}}"><p class="err" role="alert">{{t.codeErr}}</p></sc-if>
+      <div style="display: flex; flex-wrap: wrap; gap: 0 20px">
+        <button type="button" class="lnk" onClick="{{resendCode}}">{{t.codeResend}}</button>
+        <button type="button" class="lnk" onClick="{{changePhone}}">{{t.codeChange}}</button>
+      </div>
+    </sc-if>
+  </form>
+</div>
+</sc-if>
+
+<sc-if value="{{is.pay}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{payForm}}" hint-placeholder-val="{{true}}">
+<div class="paygrid">
+  <div class="stack" style="gap: 16px">
+    <button type="button" class="lnk" style="align-self: flex-start; align-items: center; gap: 2px" onClick="{{goProfile}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>{{t.back}}</button>
+    <h1 class="t1">{{t.payT}}</h1>
+    <p class="mut">{{t.payLead}}</p>
+    <ul class="feat">
+      <sc-for list="{{t.payFeat}}" as="f" hint-placeholder-count="4"><li><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg><span>{{f}}</span></li></sc-for>
+    </ul>
+  </div>
+  <div class="stack" style="gap: 12px">
+    <h2 class="t4">{{t.payPlanT}}</h2>
+    <div class="planopts">
+      <sc-for list="{{planOpts}}" as="o" hint-placeholder-count="3"><button type="button" class="planopt" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}"><span>{{o.name}}</span><span class="b6">{{o.price}}</span></button></sc-for>
+    </div>
+    <h2 class="t4" style="margin-top: 8px">{{t.payMethodT}}</h2>
+    <div class="segw" role="group" aria-label="{{t.payMethodT}}">
+      <button type="button" aria-pressed="{{payM.kaspi}}" onClick="{{setKaspi}}">{{t.kaspi}}</button>
+      <button type="button" aria-pressed="{{payM.card}}" onClick="{{setCard}}">{{t.card}}</button>
+    </div>
+    <button type="button" class="btn" style="margin-top: 8px" onClick="{{payNow}}">{{t.payCta}}</button>
+    <p class="sm mut" style="text-align: center">{{t.payLegalA}} <a class="authlink" href="{{legalHref}}#payment">{{t.payLegalB}}</a>{{t.payLegalC}}</p>
+    <button type="button" class="btn2">{{t.askParent}}</button>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{paid}}" hint-placeholder-val="{{false}}">
+<div class="center">
+  <div class="narrow" style="align-items: center; text-align: center">
+    <span class="success"><svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg></span>
+    <h1 class="t2">{{t.paidT}}</h1>
+    <p class="mut">{{t.paidD}}</p>
+    <button type="button" class="btn" style="align-self: stretch" onClick="{{goHome}}">{{t.paidCta}}</button>
+  </div>
+</div>
+</sc-if>
+</sc-if>
+
+</main>
+
+<sc-if value="{{showNav}}" hint-placeholder-val="{{true}}">
+<nav class="tabbar" aria-label="{{t.navAria}}">
+  <button type="button" class="tab" aria-current="{{cur.home}}" onClick="{{goHome}}"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5.500v-6h-5v6H4z"></path></svg><span>{{t.tabToday}}</span></button>
+  <button type="button" class="tab" aria-current="{{cur.tasks}}" onClick="{{goTasks}}"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10M4 6l1.200 1.200L7 5M4 12l1.200 1.200L7 11M4 18l1.200 1.200L7 17"></path></svg><span>{{t.tabTasks}}</span></button>
+  <button type="button" class="tab" aria-current="{{cur.cal}}" onClick="{{goCalendar}}"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10.500h16M8 3v4M16 3v4"></path></svg><span>{{t.tabCal}}</span></button>
+  <button type="button" class="tab" aria-current="{{cur.map}}" onClick="{{goMap}}"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 9.300h16M4 14.600h16M9.300 4v16M14.600 4v16"></path></svg><span>{{t.tabMap}}</span></button>
+  <button type="button" class="tab" aria-current="{{cur.mock}}" onClick="{{goMockIntro}}"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4.500l3 2M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM9 2.500h6"></path></svg><span>{{t.tabMock}}</span></button>
+</nav>
+</sc-if>
+
+</div>
+</div>

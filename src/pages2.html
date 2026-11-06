@@ -1,0 +1,147 @@
+<sc-if value="{{is.help}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.hpH}}</h1>
+  <p class="s-sub">{{t.hpSub}}</p>
+  <div class="s-search">
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M16.500 16.500 21 21"></path></svg>
+    <input id="up-help" type="search" placeholder="{{t.hpPh}}" aria-label="{{t.hpPh}}">
+  </div>
+</section>
+<section class="s-sec s-alt" style="padding-top: clamp(28px, 3.5cqw, 48px)">
+  <div class="s-in s-help">
+    <div class="s-help-main">
+      <div class="s-caps" role="group" aria-label="{{t.hpCatAria}}">
+        <sc-for list="{{helpCats}}" as="x" hint-placeholder-count="7"><button type="button" aria-pressed="{{x.pressed}}" data-cat="{{x.id}}">{{x.label}}</button></sc-for>
+      </div>
+      <div class="s-faq s-helpq" data-help-list="">
+          <sc-for list="{{helpItems}}" as="x" hint-placeholder-count="10">
+            <details data-c="{{x.c}}">
+              <summary><span>{{x.q}}</span><svg class="s-pm" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></summary>
+              <p>{{x.a}}</p>
+            </details>
+          </sc-for>
+        </div>
+        <div class="s-empty" role="status" hidden="" data-help-empty="">
+          <h2 class="s-lt">{{t.hpNoT}}</h2>
+          <p class="s-p">{{t.hpNoD}}</p>
+          <button type="button" class="s-more" data-help-reset="">{{t.hpReset}}</button>
+        </div>
+    </div>
+    <aside class="s-help-side" id="contact">
+      <h2 class="s-lt">{{t.hpCT}}</h2>
+      <p class="s-p">{{t.hpCD}}</p>
+      <ul class="s-list" style="margin-top: 8px">
+        <li><span class="s-grow">WhatsApp</span><b>{{t.hpWa}}</b></li>
+        <li><span class="s-grow">{{t.hpMailL}}</span><b>{{t.hpMail}}</b></li>
+        <li><span class="s-grow">{{t.hpTimeL}}</span><b>{{t.hpTime}}</b></li>
+      </ul>
+      <a class="s-more" href="{{href.legal}}">{{t.hpDocs}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+    </aside>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.legal}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.lgH}}</h1>
+  <p class="s-sub">{{t.lgSub}}</p>
+  <p class="s-draft">{{t.lgDraft}}</p>
+</section>
+<section class="s-sec" style="padding-top: 0">
+  <div class="s-in s-docs">
+    <nav class="s-toc" aria-label="{{t.lgToc}}">
+      <sc-for list="{{docs}}" as="d" hint-placeholder-count="4"><a href="#{{d.id}}">{{d.t}}</a></sc-for>
+    </nav>
+    <div class="s-doc-body">
+      <sc-for list="{{docs}}" as="d" hint-placeholder-count="4">
+        <section class="s-docsec" id="{{d.id}}">
+          <h2 class="s-h3">{{d.t}}</h2>
+          <div class="s-prose">
+            <sc-for list="{{d.blocks}}" as="b" hint-placeholder-count="4">
+              <sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h3>{{b.h}}</h3></sc-if>
+              <sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.p}}</p></sc-if>
+              <sc-if value="{{b.hasUl}}" hint-placeholder-val="{{false}}"><ul><sc-for list="{{b.ul}}" as="x" hint-placeholder-count="3"><li>{{x}}</li></sc-for></ul></sc-if>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{is.blog}}" hint-placeholder-val="{{false}}">
+<section class="s-head">
+  <h1 class="s-h1">{{t.blH}}</h1>
+  <p class="s-sub">{{t.blSub}}</p>
+</section>
+<section class="s-sec s-alt" style="padding-top: clamp(28px, 3.5cqw, 48px)">
+  <div class="s-in s-cards">
+    <sc-for list="{{articles}}" as="a" hint-placeholder-count="3">
+      <a class="s-card" href="{{a.href}}">
+        <span class="s-card-t">{{a.t}}</span>
+        <span class="s-p">{{a.d}}</span>
+        <span class="s-more">{{t.blRead}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+<sc-if value="{{is.article}}" hint-placeholder-val="{{false}}">
+<article class="s-sec s-article">
+  <div class="s-read">
+    <a class="s-more s-back" href="{{href.blog}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>{{t.blAll}}</a>
+    <h1 class="s-h2">{{art.t}}</h1>
+    <p class="s-note" style="margin-top: 10px">{{t.blMeta}}</p>
+    <div class="s-prose s-prose-l">
+      <sc-for list="{{art.blocks}}" as="b" hint-placeholder-count="6">
+        <sc-if value="{{b.h}}" hint-placeholder-val="{{false}}"><h2>{{b.h}}</h2></sc-if>
+        <sc-if value="{{b.p}}" hint-placeholder-val="{{true}}"><p>{{b.p}}</p></sc-if>
+        <sc-if value="{{b.hasUl}}" hint-placeholder-val="{{false}}"><ul><sc-for list="{{b.ul}}" as="x" hint-placeholder-count="3"><li>{{x}}</li></sc-for></ul></sc-if>
+        <sc-if value="{{b.hasT4}}" hint-placeholder-val="{{false}}">
+          <div class="s-tbl s-tbl-a">
+            <table>
+              <thead><tr><th>{{t.th1}}</th><th>{{t.th2}}</th><th>{{t.th3}}</th><th>{{t.th4}}</th></tr></thead>
+              <tbody>
+                <sc-for list="{{b.t4}}" as="r" hint-placeholder-count="5"><tr class="{{r.cls}}"><td>{{r.n}}</td><td class="n">{{r.q}}</td><td class="n">{{r.p}}</td><td class="n">{{r.m}}</td></tr></sc-for>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+        <sc-if value="{{b.hasT2}}" hint-placeholder-val="{{false}}">
+          <div class="s-tbl s-tbl-a">
+            <table>
+              <thead><tr><th>{{t.blT2a}}</th><th>{{t.blT2b}}</th></tr></thead>
+              <tbody>
+                <sc-for list="{{b.t2}}" as="r" hint-placeholder-count="5"><tr><td>{{r.a}}</td><td class="n">{{r.b}}</td></tr></sc-for>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+      </sc-for>
+    </div>
+    <aside class="s-cta-card">
+      <h2 class="s-lt">{{art.ctaT}}</h2>
+      <a class="a-btn" href="{{art.ctaHref}}">{{art.ctaL}}</a>
+    </aside>
+    <div class="s-srcs">
+      <p class="s-note" style="font-weight: 600">{{t.blSrc}}</p>
+      <ul><sc-for list="{{art.src}}" as="x" hint-placeholder-count="2"><li><a href="{{x.u}}" target="_blank" rel="noopener">{{x.l}}</a></li></sc-for></ul>
+    </div>
+    <a class="s-next" href="{{art.next.href}}"><span class="s-note">{{t.blNext}}</span><span class="s-card-t">{{art.next.t}}</span></a>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{is.notfound}}" hint-placeholder-val="{{false}}">
+<section class="s-nf">
+  <dc-import name="Logo" kind="mark" size="88" hint-size="88px,88px"></dc-import>
+  <h1 class="s-h1">{{t.nfH}}</h1>
+  <p class="s-sub">{{t.nfSub}}</p>
+  <div class="s-ctas">
+    <a class="a-btn" href="{{href.home}}">{{t.nfHome}}</a>
+    <a class="s-more" href="{{href.subjects}}">{{t.nav.subjects}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+    <a class="s-more" href="{{href.help}}">{{t.hpNav}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></a>
+  </div>
+</section>
+</sc-if>
