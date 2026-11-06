@@ -1,8 +1,8 @@
 # ENTer: сайт и приложение для подготовки к ЕНТ
 
-Сайт: https://dairbekovkaisar-byte.github.io/enter/
+Сайт: https://dairbekovkaisar-byte.github.io/EnTer/
 
-Приложение: https://dairbekovkaisar-byte.github.io/enter/app.html
+Приложение: https://dairbekovkaisar-byte.github.io/EnTer/app.html
 
 Папка `dist` это готовый сайт. Его можно выложить на любой статический хостинг: файлы копируются как есть, сервер и база данных пока не нужны.
 
