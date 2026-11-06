@@ -20,6 +20,31 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
   }
 
+  /* light or dark: one choice for the site and the app, kept in the browser */
+  var themeBtn = $('[data-theme-toggle]');
+  if (themeBtn) {
+    var root = document.documentElement;
+    var syncTheme = function () {
+      var dark = root.getAttribute('data-theme') === 'dark';
+      var label = themeBtn.getAttribute(dark ? 'data-label-light' : 'data-label-dark');
+      themeBtn.setAttribute('aria-label', label);
+      themeBtn.setAttribute('title', label);
+      $$('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', dark ? '#000000' : '#FFFFFF'); });
+    };
+    var stored = function () { try { return localStorage.getItem('enter-theme') === 'dark' ? 'dark' : 'light'; } catch (e) { return root.getAttribute('data-theme') || 'light'; } };
+    themeBtn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('enter-theme', next); } catch (e) { /* the choice holds on this page only */ }
+      syncTheme();
+    });
+    /* the choice may have changed on another page or tab */
+    var reapply = function () { root.setAttribute('data-theme', stored()); syncTheme(); };
+    window.addEventListener('pageshow', function (e) { if (e.persisted) reapply(); });
+    window.addEventListener('storage', function (e) { if (e.key === 'enter-theme') reapply(); });
+    syncTheme();
+  }
+
   /* one question on the home page */
   var box = $('[data-try]');
   if (box) {

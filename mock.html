@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
-<script>document.documentElement.className='js'</script>
+<script>(function(d){d.className='js';var t='light';try{if(localStorage.getItem('enter-theme')==='dark')t='dark'}catch(e){}d.setAttribute('data-theme',t);var c=t==='dark'?'#000000':'#FFFFFF',m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++)m[i].setAttribute('content',c)})(document.documentElement)</script>
 </head>
 <body>
 <div class="up lp" lang="ru">
@@ -43,6 +43,7 @@
       <a class="s-nl" href="subjects.html" aria-current="false">Предметы</a><a class="s-nl" href="mock.html" aria-current="page">Пробный ЕНТ</a><a class="s-nl" href="grants.html" aria-current="false">Гранты</a><a class="s-nl" href="pricing.html" aria-current="false">Цены</a><a class="s-nl" href="parents.html" aria-current="false">Родителям</a>
     </nav>
     <a class="s-lang" href="kk/mock.html" hreflang="kk" aria-label="Қазақша">ҚАЗ</a>
+    <button class="s-icon s-theme" type="button" aria-label="Включить тёмную тему" title="Включить тёмную тему" data-theme-toggle="" data-label-dark="Включить тёмную тему" data-label-light="Включить светлую тему"><svg class="i-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="i-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path></svg></button>
     <a class="s-nl" href="app.html#login">Войти</a>
     <a class="a-btn a-btn-s s-nav-cta" href="app.html#start">Начать</a>
     <button class="s-icon s-burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="s-menu" data-menu-open=""><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8.500h16M4 15.500h16"></path></svg></button>

@@ -39,6 +39,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .s-lang:hover{background:var(--track)}
 .s-icon{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:2px;padding:0;border:0;border-radius:10px;background:none;cursor:pointer}
 .s-icon:hover{background:var(--track)}
+.s-theme{color:var(--text)}
+.s-theme .i-sun,:root[data-theme="dark"] .s-theme .i-moon{display:none}
+:root[data-theme="dark"] .s-theme .i-sun{display:block}
+html:not(.js) .s-theme{display:none}
+@media (max-width:359.98px){.s-nav-cta{display:none}}
 .s-nav-cta{margin-inline:4px}
 
 /* phone menu */

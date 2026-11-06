@@ -436,3 +436,5 @@ button.lrow::after{content:"";flex:none;width:8px;height:8px;margin-left:4px;bor
 .segw.sh{display:none}
 .trow[aria-current="true"]{background:none}
 }
+.onbtop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.onbtop .iconbtn{margin-right:-10px}
