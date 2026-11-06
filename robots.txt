@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /enter/
+Disallow: /enter/app.html
+Disallow: /enter/kk/app.html
+Sitemap: https://dairbekovkaisar-byte.github.io/enter/sitemap.xml
