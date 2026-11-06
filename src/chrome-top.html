@@ -8,6 +8,7 @@
       <sc-for list="{{navItems}}" as="n" hint-placeholder-count="5"><a class="s-nl" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}</a></sc-for>
     </nav>
     <a class="s-lang" href="{{href.other}}" hreflang="{{otherLang}}" aria-label="{{t.langTo}}">{{t.langShort}}</a>
+    <button class="s-icon s-theme" type="button" aria-label="{{t.themeToDark}}" title="{{t.themeToDark}}" data-theme-toggle="" data-label-dark="{{t.themeToDark}}" data-label-light="{{t.themeToLight}}"><svg class="i-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="i-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path></svg></button>
     <a class="s-nl" href="{{href.auth}}">{{t.login}}</a>
     <a class="a-btn a-btn-s s-nav-cta" href="{{href.onb}}">{{t.start}}</a>
     <button class="s-icon s-burger" type="button" aria-label="{{t.menuOpen}}" aria-expanded="false" aria-controls="s-menu" data-menu-open=""><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8.500h16M4 15.500h16"></path></svg></button>

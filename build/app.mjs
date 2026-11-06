@@ -49,6 +49,7 @@ const shell = (lang, base) => `<!doctype html>
 html,body{background:var(--page);color:var(--page-text)}
 .nojs{max-width:520px;margin:48px auto;padding:0 16px;font:400 17px/1.47 -apple-system,BlinkMacSystemFont,Inter,"Segoe UI",Roboto,Arial,sans-serif}
 </style>
+<script>(function(d){var t='light';try{if(localStorage.getItem('enter-theme')==='dark')t='dark'}catch(e){}d.setAttribute('data-theme',t);var c=t==='dark'?'#000000':'#F5F5F7',m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++)m[i].setAttribute('content',c)})(document.documentElement)</script>
 </head>
 <body>
 <div id="app"></div>

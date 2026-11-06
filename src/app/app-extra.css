@@ -53,3 +53,5 @@
 .segw.sh{display:none}
 .trow[aria-current="true"]{background:none}
 }
+.onbtop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.onbtop .iconbtn{margin-right:-10px}

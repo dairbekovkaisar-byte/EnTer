@@ -13,7 +13,7 @@
   const MOCK_MS = 240 * 60000;
   const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
   const SUBJ = { 'Математика': 'math', 'Физика': 'phys' };
-  const SUN = 'M12 3V1.500M12 22.500V21M3 12H1.500M22.500 12H21M5.600 5.600 4.500 4.500M19.500 19.500l-1.100-1.100M18.400 5.600l1.100-1.100M4.500 19.500l1.100-1.100M8 8h8v8H8z';
+  const SUN = 'M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z';
   const MOON = 'M20 14.500A8.500 8.500 0 0 1 9.500 4a8.500 8.500 0 1 0 10.500 10.500z';
 
   const pad2 = (n) => String(n).padStart(2, '0');
@@ -31,6 +31,10 @@
   }
   function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* see load */ } }
   let S = load();
+  /* light or dark: one choice for the app and the public pages, light until someone picks dark */
+  const THEME_KEY = 'enter-theme';
+  const sharedTheme = () => { try { const v = window.localStorage.getItem(THEME_KEY); return v === 'dark' ? 'night' : v === 'light' ? 'day' : null; } catch (e) { return null; } };
+  const setTheme = (x) => { try { window.localStorage.setItem(THEME_KEY, x === 'night' ? 'dark' : 'light'); } catch (e) { /* the choice still holds until the tab closes */ } commit({ theme: x }); };
 
   /* ---------- task bank by subject and topic ---------- */
   const BY = {};
@@ -483,8 +487,7 @@
     const scr = U.screen;
     const is = { onboard: scr === 'onboard', home: scr === 'home', q: scr === 'q', done: scr === 'done', map: scr === 'map', mockIntro: scr === 'mockIntro', mock: scr === 'mock', result: scr === 'result', limit: scr === 'limit', share: scr === 'share', tasks: scr === 'tasks', calendar: scr === 'calendar', profile: scr === 'profile', auth: scr === 'auth', pay: scr === 'pay' };
     const showNav = is.home || is.map || is.mockIntro || is.result || is.tasks || is.calendar || is.profile;
-    const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = S.theme || (dark ? 'night' : 'day');
+    const theme = sharedTheme() || S.theme || 'day';
     const md = model();
     const pair = pairObj(), names = pair[PAGE], labels = t.short.concat(names), fullNames = t.full.concat(names);
     const keys = blockKeys();
@@ -750,7 +753,7 @@
       pairLabel: names.join(' + '), examIso: S.examIso, setExam: (e) => { if (e.target.value) commit({ examIso: e.target.value }); },
       parentOn: !!S.parentOn, toggleParent: (e) => commit({ parentOn: e.target.checked }), parentPhone: S.parentPhone, setParentPhone: (e) => commit({ parentPhone: e.target.value }),
       remindOn: !!S.remindOn, toggleRemind: (e) => commit({ remindOn: e.target.checked }), remindTime: S.remindTime, setRemindTime: (e) => { if (e.target.value) commit({ remindTime: e.target.value }); },
-      themeSeg: { day: theme === 'day' ? 'true' : 'false', night: theme === 'night' ? 'true' : 'false' }, setDay: () => commit({ theme: 'day' }), setNight: () => commit({ theme: 'night' }),
+      themeSeg: { day: theme === 'day' ? 'true' : 'false', night: theme === 'night' ? 'true' : 'false' }, setDay: () => setTheme('day'), setNight: () => setTheme('night'),
       planLabel: S.plan === 'full' ? t.planFull : t.planFree, planFree: S.plan !== 'full', planFull: S.plan === 'full', backToFree: () => { U.paid = false; commit({ plan: 'free' }); },
       hasPhone: !!S.phone, noPhone: !S.phone, profilePhone: maskPhone(S.phone), initial: 'E', logout: () => { commit({ phone: '' }); go('auth', { authStep: 'phone', code: '', codeBad: false, authNext: null, phoneInput: '' }); },
 
@@ -792,7 +795,7 @@
       cur: { home: is.home ? 'page' : undefined, map: is.map ? 'page' : undefined, mock: (is.mockIntro || is.result) ? 'page' : undefined, tasks: is.tasks ? 'page' : undefined, cal: is.calendar ? 'page' : undefined, profile: is.profile ? 'page' : undefined },
       seg: { ru: PAGE === 'ru' ? 'true' : 'false', kk: PAGE === 'kk' ? 'true' : 'false' },
       setRu: () => { if (PAGE !== 'ru') window.location.href = '../app.html#profile'; }, setKk: () => { if (PAGE !== 'kk') window.location.href = 'kk/app.html#profile'; },
-      themeAria: theme === 'night' ? t.themeToDay : t.themeToNight, themeIcon: theme === 'night' ? SUN : MOON, toggleTheme: () => commit({ theme: theme === 'night' ? 'day' : 'night' }),
+      themeAria: theme === 'night' ? t.themeToDay : t.themeToNight, themeIcon: theme === 'night' ? SUN : MOON, toggleTheme: () => setTheme(theme === 'night' ? 'day' : 'night'),
       goHome: goTo('home'), goMap: goTo('map'), goMockIntro: goTo('mockIntro'), goResult: goTo('result', { resultI: -1 }), goShare: goTo('share'), goDone: goTo('done', { doneStage: 1 }),
       startSession: startDaily, startMore: startMore, startMock: startMock,
       finishDone: goTo('home'),
@@ -838,6 +841,8 @@
     document.documentElement.setAttribute('lang', PAGE);
     const nowTheme = (root.querySelector('.up') || {}).getAttribute ? root.querySelector('.up').getAttribute('data-theme') : 'day';
     document.documentElement.setAttribute('data-theme', nowTheme === 'night' ? 'dark' : 'light');
+    const barColor = nowTheme === 'night' ? '#000000' : '#F5F5F7';
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => { if (m.getAttribute('content') !== barColor) m.setAttribute('content', barColor); });
     const key = U.screen + '|' + (S.sess ? S.sess.i : '') + '|' + (S.mock ? S.mock.subj + '-' + S.mock.cur[S.mock.subj] : '') + '|' + U.tasksTab + '|' + U.topicOpen;
     if (key !== lastKey) {
       const keepScroll = lastScreen === U.screen && U.screen === 'tasks' && !U.topicOpen;
@@ -875,7 +880,9 @@
       if (U.checked) nextQ(); else if (!empty) check();
     }
   });
-  if (window.matchMedia) { const mm = window.matchMedia('(prefers-color-scheme: dark)'); if (mm.addEventListener) mm.addEventListener('change', render); }
+  /* the theme may change on another page or tab */
+  window.addEventListener('storage', (e) => { if (e.key === THEME_KEY) render(); });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) render(); });
   window.addEventListener('resize', (() => { let w = window.innerWidth; return () => { const n = window.innerWidth; if ((w < 700) !== (n < 700)) render(); w = n; }; })());
 
   const start = resolve(window.location.hash.slice(1));

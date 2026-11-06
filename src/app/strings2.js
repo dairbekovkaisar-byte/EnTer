@@ -95,6 +95,7 @@ const T3 = {
     openTopics: 'Открыть темы', calcClear: 'Очистить', calcBack: 'Стереть', calcSq: 'В квадрат', calcRoot: 'Корень', calcErr: 'Ошибка', calcEq: 'Посчитать',
     reviewSubN: (n, min) => n + ' заданий, около ' + min + ' минут.', agDoneN: (g, c, n) => (g > 0 ? '+' + g + ' к баллу. ' : '') + 'Верно: ' + c + ' из ' + n + '.',
     customDel: 'Удалить', icsBlocked: 'Если файл не скачался, открой сайт в обычном браузере.',
+    themeToNight: 'Включить тёмную тему', themeToDay: 'Включить светлую тему',
     pairLabelShort: 'Предметы', demoPayNote: 'Полный доступ в этой версии открывается без оплаты.'
   },
   kk: {
@@ -126,6 +127,7 @@ const T3 = {
     openTopics: 'Тақырыптарды ашу', calcClear: 'Тазарту', calcBack: 'Өшіру', calcSq: 'Квадрат', calcRoot: 'Түбір', calcErr: 'Қате', calcEq: 'Есептеу',
     reviewSubN: (n, min) => n + ' тапсырма, шамамен ' + min + ' минут.', agDoneN: (g, c, n) => (g > 0 ? 'Ұпайға +' + g + '. ' : '') + 'Дұрыс жауап: ' + c + '/' + n + '.',
     customDel: 'Жою', icsBlocked: 'Файл жүктелмесе, сайтты кәдімгі браузерде аш.',
+    themeToNight: 'Түнгі көріністі қосу', themeToDay: 'Күндізгі көріністі қосу',
     pairLabelShort: 'Пәндер', demoPayNote: 'Бұл нұсқада толық қолжетімділік төлемсіз ашылады.'
   }
 };

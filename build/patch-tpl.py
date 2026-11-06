@@ -6,6 +6,7 @@ src = open(S + '/src/app/app.tpl.html', encoding='utf8').read()
 CLOSE = '<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>'
 CHECK16 = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"></path></svg>'
 CROSS16 = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>'
+THEME_BTN = '<button type="button" class="iconbtn" aria-label="{{themeAria}}" title="{{themeAria}}" onClick="{{toggleTheme}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{themeIcon}}"></path></svg></button>'
 R = [
  # navigation: the same initial everywhere
  ('{{t.profileInitial}}', '{{initial}}', 3),
@@ -100,6 +101,11 @@ R = [
  ('<button type="button" class="btn" style="margin-top: 8px" onClick="{{payNow}}">{{t.payCta}}</button>', '<p class="sm demo" style="margin-top: 8px">{{t.payDemo}}</p>\n    <button type="button" class="btn" onClick="{{payNow}}">{{t.payCta}}</button>', 1),
  ('\n    <button type="button" class="btn2">{{t.askParent}}</button>', '', 1),
  ('onClick="{{goHome}}">{{t.paidCta}}</button>', 'onClick="{{paidGo}}">{{paidCta}}</button>', 1),
+ # theme switch next to the profile button, and on the first screen
+ ('<button type="button" class="iconbtn ph" style="align-items: center; justify-content: center" aria-label="{{t.tabProfile}}" onClick="{{goProfile}}"><span class="avatar" aria-hidden="true">{{initial}}</span></button>',
+  THEME_BTN + '\n    <button type="button" class="iconbtn ph" style="align-items: center; justify-content: center" aria-label="{{t.tabProfile}}" onClick="{{goProfile}}"><span class="avatar" aria-hidden="true">{{initial}}</span></button>', 1),
+ ('<div class="onb">\n  <div class="onbform">\n    <a class="brandlink" href="{{landingHref}}" aria-label="ENTer"><dc-import name="Logo" size="30" hint-size="130px,30px"></dc-import></a>',
+  '<div class="onb">\n  <div class="onbform">\n    <div class="onbtop"><a class="brandlink" href="{{landingHref}}" aria-label="ENTer"><dc-import name="Logo" size="30" hint-size="130px,30px"></dc-import></a>' + THEME_BTN + '</div>', 1),
 ]
 out = src
 for old, new, n in R:

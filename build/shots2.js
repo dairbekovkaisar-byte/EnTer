@@ -97,6 +97,8 @@ const seedMock = (subj) => {
     await page.locator('.mbar .iconbtn.ph').click();
     await page.waitForSelector('.box');
     await shot('mockNav');
+    // the exam with a reading passage sits in a laptop frame on the site, so it is taken at laptop size
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.evaluate(seedMock, 1);
     await open('exam', '.mq .passage');
     await shot('mockRead');

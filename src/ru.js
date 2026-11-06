@@ -1,5 +1,5 @@
   ru: {
-    skip: 'Перейти к содержанию', navAria: 'Разделы сайта', langAria: 'Язык', langShort: 'ҚАЗ', langTo: 'Қазақша', menuOpen: 'Открыть меню', menuClose: 'Закрыть меню', menuAria: 'Меню',
+    skip: 'Перейти к содержанию', navAria: 'Разделы сайта', langAria: 'Язык', langShort: 'ҚАЗ', langTo: 'Қазақша', themeToDark: 'Включить тёмную тему', themeToLight: 'Включить светлую тему', menuOpen: 'Открыть меню', menuClose: 'Закрыть меню', menuAria: 'Меню',
     nav: { subjects: 'Предметы', mock: 'Пробный ЕНТ', grants: 'Гранты', pricing: 'Цены', parents: 'Родителям' },
     start: 'Начать', login: 'Войти',
     h1: 'Подготовка к\u00A0ЕНТ, где\u00A0видно каждый балл.',

@@ -197,7 +197,7 @@ ${pageId === 'notfound' ? '<meta name="robots" content="noindex">' : `<link rel=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <link rel="stylesheet" href="${asset('site.css')}">
-<script>document.documentElement.className='js'</script>`;
+<script>(function(d){d.className='js';var t='light';try{if(localStorage.getItem('enter-theme')==='dark')t='dark'}catch(e){}d.setAttribute('data-theme',t);var c=t==='dark'?'#000000':'#FFFFFF',m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++)m[i].setAttribute('content',c)})(document.documentElement)</script>`;
   const scripts = `<script src="${asset('brand.js')}" defer></script>
 <script src="${asset('site.js')}" defer></script>`;
   return { self, head, body, scripts, lang };

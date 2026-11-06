@@ -1,5 +1,5 @@
   kk: {
-    skip: 'Мазмұнға өту', navAria: 'Сайт бөлімдері', langAria: 'Тіл', langShort: 'РУС', langTo: 'На русском', menuOpen: 'Мәзірді ашу', menuClose: 'Мәзірді жабу', menuAria: 'Мәзір',
+    skip: 'Мазмұнға өту', navAria: 'Сайт бөлімдері', langAria: 'Тіл', langShort: 'РУС', langTo: 'На русском', themeToDark: 'Түнгі көріністі қосу', themeToLight: 'Күндізгі көріністі қосу', menuOpen: 'Мәзірді ашу', menuClose: 'Мәзірді жабу', menuAria: 'Мәзір',
     nav: { subjects: 'Пәндер', mock: 'Сынақ ҰБТ', grants: 'Гранттар', pricing: 'Бағалар', parents: 'Ата-анаға' },
     start: 'Бастау', login: 'Кіру',
     h1: 'ҰБТ-ға дайындық: әр ұпай көз алдыңда.',

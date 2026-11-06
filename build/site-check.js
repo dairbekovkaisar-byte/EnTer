@@ -19,7 +19,7 @@ const pages = walk(D).filter((f) => f.endsWith('.html') && !/app\.html$/.test(f)
       await page.goto(BASE + p, { waitUntil: 'load' });
       await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 25)); } window.scrollTo(0, 0); });
       await page.waitForTimeout(150);
-      const r = await page.evaluate(() => { const de = document.documentElement; return { over: de.scrollWidth - de.clientWidth, broken: [...document.images].filter((i) => !i.complete || !i.naturalWidth).map((i) => i.getAttribute('src')).slice(0, 3), n: document.images.length, ph: (document.body.innerText.match(/\{\{|undefined|NaN|\[object/g) || []).length }; });
+      const r = await page.evaluate(() => { const de = document.documentElement; return { over: de.scrollWidth - de.clientWidth, broken: [...document.images].filter((i) => i.getBoundingClientRect().width > 0 && (!i.complete || !i.naturalWidth)).map((i) => i.getAttribute('src')).slice(0, 3), n: document.images.length, ph: (document.body.innerText.match(/\{\{|undefined|NaN|\[object/g) || []).length }; });
       if (r.over > 0 || r.broken.length || r.ph) { bad++; console.log('PROBLEM', w, p, JSON.stringify(r)); }
       if (['index.html', 'kk/index.html', 'pricing.html', 'mock.html', 'articles/ent-format.html'].includes(p)) await page.screenshot({ path: `${OUT}/${w}-${p.replace(/\W/g, '_')}.png`, fullPage: true });
     }
