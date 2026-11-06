@@ -15,7 +15,7 @@ git commit -m "$MSG" || echo "В исходниках изменений нет"
 git push origin main
 
 # dist ложится в gh-pages новым коммитом поверх уже опубликованного сайта
-git fetch origin gh-pages
+git fetch origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
 TMP="$(mktemp -d)"
 git worktree add --detach "$TMP" origin/gh-pages
 find "$TMP" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
